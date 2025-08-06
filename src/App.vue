@@ -1,24 +1,38 @@
 <template>
   <div id="app">
     <Welcome v-if="currentPage === 'welcome'" @start-quiz="startQuiz" />
-    <Quiz v-if="currentPage === 'quiz'" @back-to-welcome="backToWelcome" />
+    <Quiz 
+      v-if="currentPage === 'quiz'" 
+      :visitorData="visitorData" 
+      @back-to-welcome="backToWelcome"
+      @view-certificate="viewCertificate"
+    />
+    <Certificate 
+      v-if="currentPage === 'certificate'" 
+      :certificateData="certificateData"
+      @back-to-quiz="backToQuiz"
+      @start-over="startOver"
+    />
   </div>
 </template>
 
 <script>
 import Welcome from './components/Welcome.vue'
 import Quiz from './components/Quiz.vue'
+import Certificate from './components/Certificate.vue'
 
 export default {
   name: 'App',
   components: {
     Welcome,
-    Quiz
+    Quiz,
+    Certificate
   },
   data() {
     return {
       currentPage: 'welcome',
-      visitorData: null
+      visitorData: null,
+      certificateData: null
     }
   },
   methods: {
@@ -28,6 +42,20 @@ export default {
     },
     backToWelcome() {
       this.currentPage = 'welcome'
+      this.visitorData = null
+      this.certificateData = null
+    },
+    viewCertificate(certData) {
+      this.certificateData = certData
+      this.currentPage = 'certificate'
+    },
+    backToQuiz() {
+      this.currentPage = 'quiz'
+    },
+    startOver() {
+      this.currentPage = 'welcome'
+      this.visitorData = null
+      this.certificateData = null
     }
   }
 }

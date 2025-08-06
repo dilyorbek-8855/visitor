@@ -32,9 +32,9 @@
           </select>
         </div>
 
-        <!-- Company Image Placeholder -->
+        <!-- Company Logo -->
         <div class="company-image">
-          <div class="image-placeholder">Image</div>
+          <img src="/logo.png" alt="Company Logo" class="company-logo">
         </div>
 
         <!-- Quiz Content -->
@@ -98,9 +98,31 @@
 
         <!-- Quiz Completion -->
         <div class="quiz-completion" v-if="quizCompleted">
-          <div class="completion-modal">
+          <!-- Certificate Modal (for passing score) -->
+          <div v-if="showCertificate" class="completion-modal certificate-modal">
+            <h2>🎉 {{ translations[currentLang].certificateTitle }}</h2>
+            <p>{{ translations[currentLang].certificateMessage }}</p>
+            <div class="score-display">
+              <p><strong>{{ translations[currentLang].certificateScore }}</strong> {{ userScore }}/{{ totalQuestions }}</p>
+            </div>
+            <p class="certificate-text">🏆 {{ translations[currentLang].certificateAwarded }}</p>
+            <div class="modal-buttons">
+              <button @click="viewCertificate" class="view-btn">
+                📜 {{ translations[currentLang].viewCertificate }}
+              </button>
+              <button @click="restartQuiz" class="restart-btn">
+                {{ translations[currentLang].restart }}
+              </button>
+            </div>
+          </div>
+          
+          <!-- Regular Completion Modal (for failing score) -->
+          <div v-else class="completion-modal">
             <h2>{{ translations[currentLang].completionTitle }}</h2>
             <p>{{ translations[currentLang].completionMessage }}</p>
+            <div class="score-display">
+              <p><strong>{{ translations[currentLang].certificateScore }}</strong> {{ userScore }}/{{ totalQuestions }}</p>
+            </div>
             <p>{{ translations[currentLang].thankYou }}</p>
             <button @click="restartQuiz" class="restart-btn">
               {{ translations[currentLang].restart }}
@@ -115,6 +137,12 @@
 <script>
 export default {
   name: 'Quiz',
+  props: {
+    visitorData: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {
       currentLang: 'uz',
@@ -122,6 +150,12 @@ export default {
       totalQuestions: 10,
       answers: Array(10).fill(null),
       quizCompleted: false,
+      userScore: 0,
+      passingScore: 8,
+      showCertificate: false,
+      
+      // Correct answers (0-based index)
+      correctAnswers: [3, 2, 1, 2, 1, 2, 1, 1, 2, 3],
       
       questions: {
         uz: [
@@ -264,7 +298,12 @@ export default {
           completionTitle: 'Uzauto Academy',
           completionMessage: 'Uzauto Academiyasi tomonidan korxona va platformamizga tashrifingiz uchun minnatdorlik bildiramiz!',
           thankYou: 'Sizning natijangiz salbiy.',
-          restart: 'Qayta boshlash'
+          restart: 'Qayta boshlash',
+          certificateTitle: 'Tabriklaymiz!',
+          certificateMessage: 'Siz testdan muvaffaqiyatli o\'tdingiz!',
+          certificateScore: 'Sizning natijangiz:',
+          certificateAwarded: 'Sizga sertifikat berildi!',
+          viewCertificate: 'Sertifikatni ko\'rish'
         },
         ru: {
           testTitle: 'О процессе тестирования',
@@ -277,7 +316,12 @@ export default {
           completionTitle: 'Uzauto Academy',
           completionMessage: 'Uzauto Academy благодарит вас за посещение нашего предприятия и платформы!',
           thankYou: 'Ваш результат отрицательный.',
-          restart: 'Начать заново'
+          restart: 'Начать заново',
+          certificateTitle: 'Поздравляем!',
+          certificateMessage: 'Вы успешно прошли тест!',
+          certificateScore: 'Ваш результат:',
+          certificateAwarded: 'Вам присуждается сертификат!',
+          viewCertificate: 'Посмотреть сертификат'
         },
         en: {
           testTitle: 'About the test process',
@@ -290,7 +334,12 @@ export default {
           completionTitle: 'Uzauto Academy',
           completionMessage: 'Uzauto Academy thanks you for visiting our enterprise and platform!',
           thankYou: 'Your result is negative.',
-          restart: 'Restart'
+          restart: 'Restart',
+          certificateTitle: 'Congratulations!',
+          certificateMessage: 'You have successfully passed the test!',
+          certificateScore: 'Your score:',
+          certificateAwarded: 'You are awarded a certificate!',
+          viewCertificate: 'View Certificate'
         }
       }
     }
@@ -311,13 +360,276 @@ export default {
     },
     finishQuiz() {
       if (this.answers[this.currentQuestion - 1] !== null) {
+        this.calculateScore()
         this.quizCompleted = true
+        this.showCertificate = this.userScore >= this.passingScore
+      }
+    },
+    viewCertificate() {
+      // Navigate to certificate page
+      this.$emit('view-certificate', {
+        visitorData: this.visitorData,
+        score: this.userScore,
+        totalQuestions: this.totalQuestions,
+        language: this.currentLang
+      })
+    },
+    calculateScore() {
+      this.userScore = 0
+      for (let i = 0; i < this.totalQuestions; i++) {
+        if (this.answers[i] === this.correctAnswers[i]) {
+          this.userScore++
+        }
       }
     },
     restartQuiz() {
       this.currentQuestion = 1
       this.answers = Array(10).fill(null)
       this.quizCompleted = false
+      this.userScore = 0
+      this.showCertificate = false
+    },
+    printCertificate() {
+      // Create a printable certificate
+      const currentDate = new Date().toLocaleDateString()
+      const currentTime = new Date().toLocaleTimeString()
+      const visitorName = `${this.visitorData.firstName || ''} ${this.visitorData.lastName || ''}`.trim() || 'Visitor'
+      
+      const certificateHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>R&D Center Certificate</title>
+          <style>
+            @media print {
+              body { margin: 0; }
+              .no-print { display: none; }
+            }
+            body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 20px;
+              background: white;
+              color: #000;
+            }
+            .certificate {
+              width: 100%;
+              max-width: 800px;
+              margin: 0 auto;
+              background: linear-gradient(135deg, #2c5aa0 0%, #4a80c4 50%, #87ceeb 100%);
+              position: relative;
+              overflow: hidden;
+            }
+            .diagonal-lines {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 200px;
+              background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255,255,255,0.1) 35%, 
+                rgba(255,255,255,0.2) 40%, 
+                transparent 45%,
+                transparent 55%,
+                rgba(255,255,255,0.1) 60%,
+                rgba(255,255,255,0.2) 65%,
+                transparent 70%);
+            }
+            .header {
+              background: #1e3c72;
+              color: white;
+              padding: 15px 30px;
+              position: relative;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .logo-section {
+              display: flex;
+              align-items: center;
+              gap: 15px;
+            }
+            .logo-placeholder {
+              width: 60px;
+              height: 60px;
+              background: white;
+              border-radius: 4px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #1e3c72;
+              font-weight: bold;
+              font-size: 14px;
+            }
+            .header-text {
+              color: white;
+              font-size: 14px;
+            }
+            .main-content {
+              background: white;
+              padding: 40px;
+              margin: 0 20px;
+              position: relative;
+              z-index: 2;
+            }
+            .certificate-title {
+              font-size: 48px;
+              font-weight: bold;
+              color: #1e3c72;
+              text-align: center;
+              margin-bottom: 30px;
+              letter-spacing: 2px;
+            }
+            .subtitle {
+              background: #1e3c72;
+              color: white;
+              padding: 15px;
+              text-align: center;
+              font-size: 14px;
+              margin-bottom: 30px;
+            }
+            .course-title {
+              color: #4a80c4;
+              font-size: 20px;
+              font-weight: bold;
+              text-align: center;
+              margin-bottom: 30px;
+            }
+            .recipient-name {
+              font-size: 32px;
+              font-weight: bold;
+              color: #1e3c72;
+              text-align: center;
+              margin: 30px 0;
+              text-transform: uppercase;
+            }
+            .certificate-number {
+              background: #1e3c72;
+              color: white;
+              padding: 8px 15px;
+              font-size: 12px;
+              position: absolute;
+              bottom: 120px;
+              left: 20px;
+              clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
+            }
+            .footer-section {
+              padding: 20px 40px;
+              background: white;
+              margin: 0 20px 20px 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .signature-area {
+              text-align: left;
+              color: #1e3c72;
+              font-size: 12px;
+            }
+            .date-area {
+              text-align: right;
+              color: #1e3c72;
+              font-size: 12px;
+            }
+            .bottom-bar {
+              background: #1e3c72;
+              color: white;
+              padding: 15px 30px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              font-size: 14px;
+            }
+            .social-handles {
+              display: flex;
+              gap: 30px;
+            }
+            .score-badge {
+              background: #28a745;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 25px;
+              font-weight: bold;
+              font-size: 16px;
+              text-align: center;
+              margin: 20px auto;
+              display: inline-block;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="certificate">
+            <div class="diagonal-lines"></div>
+            
+            <div class="header">
+              <div class="logo-section">
+                <div class="logo-placeholder">LOGO</div>
+                <div class="header-text">Research & Development<br>Center</div>
+              </div>
+            </div>
+            
+            <div class="main-content">
+              <div class="certificate-title">SERTIFIKAT</div>
+              
+              <div class="subtitle">
+                "Research & Development Center" boshqarmasida<br>
+                ELEKTROGAZPAYVANDLASH<br>
+                kursidan ijobiy natija olganligi uchun
+              </div>
+              
+              <div class="course-title">3-PAYVANDLASH SEXI XODIMI</div>
+              
+              <div class="recipient-name">${visitorName.toUpperCase()}</div>
+              
+              <div class="score-badge">
+                Natija: ${this.userScore}/${this.totalQuestions} (${Math.round((this.userScore/this.totalQuestions)*100)}%)
+              </div>
+              
+              <div class="certificate-number">
+                ${new Date().getFullYear()} yil Berildi: R&D Center: № ${String(Math.floor(Math.random() * 9000) + 1000).padStart(4, '0')}
+              </div>
+            </div>
+            
+            <div class="footer-section">
+              <div class="signature-area">
+                Texnik rivojlantirish direksiyasi direktori: ${this.getDirectorName ? this.getDirectorName() : 'Director'}<br>
+                <div style="margin-top: 10px;">___________________ M.O'.</div>
+                <div style="font-size: 10px; margin-top: 5px;">(Imzo)</div>
+              </div>
+              <div class="date-area">
+                ${currentDate}
+              </div>
+            </div>
+            
+            <div class="bottom-bar">
+              <div class="social-handles">
+                <span>📱 @uzauto_rd_center</span>
+                <span>📷 @uzauto_rd_center</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="no-print" style="text-align: center; margin-top: 20px;">
+            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; background: #1e3c72; color: white; border: none; border-radius: 4px;">Print Certificate</button>
+            <button onclick="window.close()" style="padding: 10px 20px; font-size: 16px; margin-left: 10px; background: #6c757d; color: white; border: none; border-radius: 4px;">Close</button>
+          </div>
+        </body>
+        </html>
+      `
+      
+      // Open print window
+      const printWindow = window.open('', '_blank', 'width=800,height=600')
+      printWindow.document.open()
+      printWindow.document.write(certificateHTML)
+      printWindow.document.close()
+      
+      // Auto-print after window loads
+      printWindow.onload = function() {
+        setTimeout(() => {
+          printWindow.print()
+        }, 500)
+      }
     }
   }
 }
@@ -447,16 +759,11 @@ body {
   width: 33.33%;
 }
 
-.image-placeholder {
+.company-logo {
   width: 100%;
   height: 80px;
-  background: #f0f0f0;
-  border: 2px dashed #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  font-size: 0.9rem;
+  object-fit: contain;
+  background: transparent;
   border-radius: 6px;
 }
 
@@ -570,8 +877,12 @@ body {
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
-  max-width: 400px;
+  max-width: 450px;
   margin: 1rem;
+}
+
+.certificate-modal {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
 }
 
 .completion-modal h2 {
@@ -584,6 +895,47 @@ body {
   line-height: 1.4;
 }
 
+.score-display {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.score-display p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.certificate-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.view-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.view-btn:hover {
+  transform: translateY(-2px);
+}
+
 .restart-btn {
   background: white;
   color: #4285f4;
@@ -592,7 +944,11 @@ body {
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 1rem;
+  transition: transform 0.2s;
+}
+
+.restart-btn:hover {
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */

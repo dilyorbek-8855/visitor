@@ -32,10 +32,10 @@
 
         <!-- Centered Content -->
         <div class="center-content">
-          <!-- Company Image Placeholder -->
-          <div class="company-image">
-            <div class="image-placeholder">Image</div>
-          </div>
+                  <!-- Company Logo -->
+        <div class="company-image">
+          <img src="/logo.png" alt="Company Logo" class="company-logo">
+        </div>
 
           <!-- Registration Form -->
           <form @submit.prevent="submitForm" class="registration-form">
@@ -302,16 +302,11 @@ body {
   width: 33.33%; /* 1/3 of the form width */
 }
 
-.image-placeholder {
+.company-logo {
   width: 100%;
   height: 80px;
-  background: #f0f0f0;
-  border: 2px dashed #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  font-size: 0.9rem;
+  object-fit: contain;
+  background: transparent;
   border-radius: 6px;
 }
 
