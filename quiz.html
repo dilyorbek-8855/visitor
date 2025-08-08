@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - R&D Center</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+    <div class="quiz-page">
+        <div class="layout">
+            <!-- Left Blue Panel -->
+            <div class="left-panel">
+                <div class="building-image">
+                    <img src="images/building.jpg" alt="UzAuto Academy" class="building-pic">
+                </div>
+                
+                <h2 class="quiz-title" id="testTitle">Test jarayoni to'g'risida</h2>
+                <p class="quiz-description" id="testDescription">Test jarayoni sakkizta savol va savol javoblaridan iborat.</p>
+                <p class="quiz-instructions" id="testInstructions">Har biz test savoli 5 ballik reytingda baholanadi. Test jarayonidan muvaffaqiyatli o'tgan ishtirokchi sertifikat bilan taqdirlandi.</p>
+                <p class="quiz-encouragement" id="encouragement">Sizning fikringiz biz uchun muhim!</p>
+                
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-text" id="progressText">0 %</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right White Panel -->
+            <div class="right-panel">
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <select id="languageSelect" class="lang-select">
+                        <option value="uz">O'z</option>
+                        <option value="ru">Ру</option>
+                        <option value="en">En</option>
+                    </select>
+                </div>
+
+                <!-- Company Logo -->
+                <div class="company-image">
+                    <img src="images/logo.png" alt="Company Logo" class="company-logo">
+                </div>
+
+                <!-- Quiz Content -->
+                <div class="quiz-content" id="quizContent">
+                    <!-- Question -->
+                    <div class="question-container">
+                        <h3 class="question-number" id="questionNumber">1. </h3>
+                        <h3 class="question-text" id="questionText"></h3>
+                    </div>
+
+                    <!-- Answer Options -->
+                    <div class="answers-container" id="answersContainer">
+                        <!-- Answer options will be loaded here -->
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="navigation-buttons">
+                        <button id="prevBtn" class="nav-btn prev-btn" disabled>
+                            orqaga
+                        </button>
+                        
+                        <button id="nextBtn" class="nav-btn next-btn">
+                            keyingi
+                        </button>
+                        
+                        <button id="finishBtn" class="nav-btn finish-btn" style="display: none;">
+                            Yakunlash
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Completion -->
+                <div class="quiz-completion" id="quizCompletion" style="display: none;">
+                    <!-- Certificate Modal (for passing score) -->
+                    <div id="certificateModal" class="completion-modal certificate-modal" style="display: none;">
+                        <h2>🎉 <span id="certificateTitle">Tabriklaymiz!</span></h2>
+                        <p id="certificateMessage">Siz testdan muvaffaqiyatli o'tdingiz!</p>
+                        <div class="score-display">
+                            <p><strong id="certificateScoreLabel">Sizning natijangiz:</strong> <span id="certificateScoreValue">0/10</span></p>
+                        </div>
+                        <p class="certificate-text">🏆 <span id="certificateAwarded">Sizga sertifikat berildi!</span></p>
+                        <div class="modal-buttons">
+                            <button id="viewCertificateBtn" class="view-btn">
+                                📜 <span id="viewCertificateText">Sertifikatni ko'rish</span>
+                            </button>
+                            <button id="restartBtn" class="restart-btn">
+                                <span id="restartText">Qayta boshlash</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Regular Completion Modal (for failing score) -->
+                    <div id="regularModal" class="completion-modal" style="display: none;">
+                        <h2 id="completionTitle">Uzauto Academy</h2>
+                        <p id="completionMessage">Uzauto Academiyasi tomonidan korxona va platformamizga tashrifingiz uchun minnatdorlik bildiramiz!</p>
+                        <div class="score-display">
+                            <p><strong id="scoreLabel">Sizning natijangiz:</strong> <span id="scoreValue">0/10</span></p>
+                        </div>
+                        <p id="thankYouMessage">Sizning natijangiz salbiy.</p>
+                        <button id="restartBtn2" class="restart-btn">
+                            <span id="restartText2">Qayta boshlash</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/translations.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html> 

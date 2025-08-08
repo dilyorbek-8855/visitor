@@ -1,73 +1,62 @@
 # Visitor Registration & Quiz System
 
-A multi-language visitor registration and quiz system built with Vue.js and Docker. Features a professional welcome page with director profile, visitor registration form, 10-question quiz, and certificate generation in 3 languages (Uzbek, Russian, English).
+A multi-language visitor registration and quiz system built with pure HTML, CSS, and JavaScript. Features a professional welcome page with director profile, visitor registration form, 10-question quiz, and certificate generation in 3 languages (Uzbek, Russian, English).
 
-## 🚀 Quick Start with Docker
+## 🚀 Quick Start
 
 ### Prerequisites
-- Docker
-- Docker Compose
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- No server required - works with direct file access
 
 ### Running the Application
 
-1. **Build and start the containers:**
-   ```bash
-   docker-compose up --build
-   ```
+1. **Open the application:**
+   - Simply double-click `index.html` to open in your browser
+   - Or open `index.html` directly in any web browser
 
-2. **Run in background:**
-   ```bash
-   docker-compose up -d
-   ```
-
-3. **Stop the containers:**
-   ```bash
-   docker-compose down
-   ```
+2. **Alternative methods:**
+   - Use Live Server extension in VS Code
+   - Use any local HTTP server (Python, Node.js, etc.)
 
 ### Development
 
-- The application runs on `http://localhost:5173`
-- Hot module replacement (HMR) is enabled
-- Code changes will automatically reload
+- The application works with direct file access
+- No build process required
+- No dependencies to install
 - Mobile-responsive design
-
-### Docker Commands
-
-- **Build image:** `docker build -t visitor .`
-- **Run container:** `docker run -p 5173:5173 visitor`
-- **View logs:** `docker-compose logs -f app`
+- Cross-browser compatible
 
 ## 🛠️ Tech Stack
 
-- **Vue.js 3** - Progressive JavaScript framework
-- **Vite** - Lightning fast build tool
-- **Docker** - Containerized development
-- **CSS Grid & Flexbox** - Modern responsive design
+- **HTML5** - Semantic markup structure
+- **CSS3** - Modern styling with Grid & Flexbox
+- **JavaScript (ES6+)** - Pure vanilla JavaScript
+- **Local Storage** - Data persistence between pages
+- **Responsive Design** - Mobile-first approach
 
 ## 📁 Project Structure
 
 ```
 visitor/
-├── Dockerfile              # Docker image configuration
-├── docker-compose.yml      # Multi-container setup
-├── .dockerignore           # Files to exclude from Docker build
-├── .gitignore              # Git ignore rules
-├── package.json            # Vue.js dependencies
-├── vite.config.js          # Vite configuration
-├── index.html              # Main HTML file
-├── public/                 # Static assets
-│   ├── director.png        # Director's profile image
-│   ├── building.jpg        # Company building image
-│   └── logo.png           # Company logo
-├── src/
-│   ├── components/
-│   │   ├── Welcome.vue     # Welcome page component
-│   │   ├── Quiz.vue        # Quiz page component
-│   │   └── Certificate.vue # Certificate page component
-│   ├── main.js            # Vue.js entry point
-│   └── App.vue            # Main app component
-└── README.md              # This file
+├── index.html              # Welcome page (main entry point)
+├── quiz.html              # Quiz page
+├── certificate.html       # Certificate page
+├── css/
+│   ├── style.css         # Global styles
+│   ├── welcome.css       # Welcome page styles
+│   ├── quiz.css          # Quiz page styles
+│   └── certificate.css   # Certificate page styles
+├── js/
+│   ├── translations.js   # Multi-language content
+│   ├── welcome.js        # Welcome page functionality
+│   ├── quiz.js           # Quiz functionality
+│   └── certificate.js    # Certificate functionality
+├── images/
+│   ├── director.png      # Director's profile image
+│   ├── building.jpg      # Company building image
+│   └── logo.png         # Company logo
+├── .gitignore            # Git ignore rules
+└── README.md            # This file
 ```
 
 ## 🎨 Features
@@ -98,83 +87,97 @@ visitor/
 - **Multi-language Support** - Certificate text in all languages
 
 ### 🔄 Navigation Flow
-1. **Welcome Page** → Visitor registration
-2. **Quiz Page** → 10-question test
-3. **Certificate Page** → View/print certificate (if passed)
+1. **Welcome Page** (`index.html`) - Visitor registration
+2. **Quiz Page** (`quiz.html`) - 10-question test
+3. **Certificate Page** (`certificate.html`) - Results and certificate
 
-## 🖼️ Assets Setup
+## 🌐 Multi-Language Support
 
-### Required Images
-Place the following images in `public/` folder:
+The application supports three languages:
+- **Uzbek (O'z)** - Default language
+- **Russian (Ру)** - Russian translation
+- **English (En)** - English translation
 
-1. **`director.png`** - Director's profile photo
-   - Recommended size: 200x200px (square format)
-   - Professional headshot of director
+All content, including:
+- Welcome messages
+- Form labels
+- Quiz questions and answers
+- Certificate text
+- Navigation buttons
 
-2. **`building.jpg`** - Company building image
-   - Used on quiz page background
-   - Company facility or relevant image
+## 📱 Responsive Design
 
-3. **`logo.png`** - Company logo
-   - Used in certificate and welcome page
-   - Company branding logo
+- **Desktop** - Full two-panel layout
+- **Tablet** - Adaptive layout with maintained proportions
+- **Mobile** - Single-column layout for optimal mobile experience
 
-### Image Guidelines
-- **Formats**: PNG, JPG supported
-- **File size**: Keep under 500KB for optimal loading
-- **Naming**: Use exact filenames as listed above
-- **Location**: All images go in `public/` folder
+## 🎯 Key Features
 
-## 🌍 Language Support
+### ✅ **Easy Deployment**
+- No build process required
+- Works with any web server
+- Compatible with GitHub Pages, Netlify, Vercel
+- Direct file access support
 
-The application supports three languages with complete translations:
+### ✅ **Professional Structure**
+- Modular CSS files
+- Organized JavaScript
+- Clean HTML structure
+- Separation of concerns
 
-- **🇺🇿 Uzbek (O'z)** - Default language
-- **🇷🇺 Russian (Ру)** - Full Russian translation  
-- **🇬🇧 English (En)** - Complete English version
+### ✅ **Cross-Browser Compatible**
+- Works in all modern browsers
+- Progressive enhancement
+- Graceful degradation
+- No framework dependencies
 
-### Translation Coverage
-- **Welcome Page**: Registration form, labels, buttons
-- **Quiz System**: Questions, answers, navigation, progress
-- **Certificate**: All certificate text and labels
-- **Navigation**: All button text and messages
+## 🚀 Deployment Options
 
-## 🎯 Quiz Content
+### GitHub Pages
+1. Push code to GitHub repository
+2. Enable GitHub Pages in repository settings
+3. Select source branch (usually `main` or `gh-pages`)
 
-### Question Topics
-- UzAutoMotors company information
-- Manufacturing processes
-- Company history and achievements
-- Industry knowledge
-- Safety and quality standards
+### Netlify
+1. Connect GitHub repository to Netlify
+2. Build command: (leave empty - no build required)
+3. Publish directory: `.` (root directory)
 
-### Scoring System
-- **Total Questions**: 10
-- **Passing Score**: 8 correct answers (80%)
-- **Certificate**: Awarded for passing score
-- **Progress Bar**: Real-time completion tracking
+### Local Development
+1. Clone the repository
+2. Open `index.html` in browser
+3. Start developing!
 
-## 🖨️ Certificate Features
+## 📝 Usage
 
-### Design Elements
-- **Blue Gradient Background** - Professional certificate styling
-- **Diagonal Lines** - Decorative background pattern
-- **R&D Center Header** - Research & Development Center branding
-- **Visitor Name** - Large, bold uppercase display
-- **Score Badge** - Green badge showing quiz results
-- **Certificate Number** - Unique auto-generated number
-- **Director Signature** - Signature line with director name
-- **Social Media** - @uzauto_rd_center handles
+1. **Open the application** by double-clicking `index.html`
+2. **Select language** using the dropdown in the top-right
+3. **Fill out the registration form** with visitor information
+4. **Complete the 10-question quiz** about UzAutoMotors
+5. **View results** - Pass (8+ correct) or Fail
+6. **Print certificate** if passed (direct browser print)
 
-### Print Functionality
-- **Direct Print** - Browser print dialog integration
-- **Print-Optimized CSS** - Clean layout for printing
-- **No Download Required** - Simplified user experience
+## 🔧 Customization
 
-## 🚀 Development Features
+### Adding New Languages
+1. Edit `js/translations.js`
+2. Add new language object with all translations
+3. Update language selector in HTML files
 
-- **Hot Reload** - Instant code updates during development
-- **Docker Ready** - Containerized for consistent deployment
-- **Component Architecture** - Modular Vue.js components
-- **Responsive Design** - Mobile-first approach
-- **Error Handling** - Graceful fallbacks for missing assets 
+### Modifying Questions
+1. Edit `js/quiz.js`
+2. Update the `questions` array
+3. Add corresponding translations in `translations.js`
+
+### Styling Changes
+1. Modify CSS files in the `css/` directory
+2. Global styles in `style.css`
+3. Page-specific styles in respective CSS files
+
+## 📄 License
+
+This project is for internal use at UzAutoMotors R&D Center.
+
+## 🤝 Contributing
+
+For internal development team use only. 
