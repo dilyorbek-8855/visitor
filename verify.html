@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification - R&D Center</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/certificate.css">
+    <style>
+        .verification-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .verification-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .verification-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .verification-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #28a745;
+        }
+        
+        .verification-info h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+        
+        .verification-info p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+        
+        .verification-info strong {
+            color: #333;
+        }
+        
+        .back-to-home {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .back-to-home a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-home a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+        }
+        
+        .certificate-verified {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .certificate-verified::before {
+            content: "✅ ";
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-page">
+        <div class="certificate-container">
+            <!-- Verification Header -->
+            <div class="verification-header">
+                <h1 class="verification-title">Sertifikat Tekshirildi</h1>
+                <p class="verification-subtitle">Certificate Verification Successful</p>
+            </div>
+            
+            <!-- Verification Status -->
+            <div class="certificate-verified">
+                Bu sertifikat haqiqiy va tasdiqlangan
+                <br>
+                This certificate is authentic and verified
+            </div>
+            
+            <!-- Certificate Information -->
+            <div class="verification-info">
+                <h3>Sertifikat Ma'lumotlari / Certificate Information</h3>
+                <p><strong>ID:</strong> <span id="certificateId">CERT-0000</span></p>
+                <p><strong>Berilgan sana / Issue Date:</strong> <span id="issueDate">01.01.2024</span></p>
+                <p><strong>Test natijasi / Test Score:</strong> <span id="testScore">0/10</span></p>
+                <p><strong>Status:</strong> <span style="color: #28a745; font-weight: bold;">✅ Tasdiqlangan / Verified</span></p>
+            </div>
+            
+            <!-- Display the Signed Certificate -->
+            <div class="certificate">
+                <div class="diagonal-lines"></div>
+                <div class="header">
+                    <div class="logo-section">
+                        <img src="images/logo.png" alt="R&D Center Logo" class="logo" onerror="handleLogoError(this)">
+                        <div class="logo-placeholder">LOGO</div>
+                        <div class="header-text">Research & Development<br>Center</div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="certificate-title">SERTIFIKAT</div>
+                    <div class="decorative-flourish"></div>
+                    <div class="purpose-statement">
+                        R&D centerga tashrif buyurgan hamda tanishuv testidan muvoffaqiyatli o'tganligi uchun
+                    </div>
+                    <div class="recipient-name" id="recipientName">VISITOR</div>
+                    <div class="signature-line"></div>
+                    <div class="issuing-authority">
+                        Texnik rivojlantirish direksiyasi direktori tomonidan berildi.
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <div class="signature-area">
+                        <div class="signature" id="directorSignature">S.A.Mamadaliyev</div>
+                        <div class="signature-title">Direksiya direktori</div>
+                    </div>
+                </div>
+                <div class="bottom-bar">
+                    <div class="uzauto-logo">
+                        <div class="uzauto-text">UzAuto</div>
+                        <div class="motors-text">MOTORS</div>
+                    </div>
+                    <div class="verification-badge">
+                        <div style="text-align: center; color: #28a745; font-weight: bold;">
+                            ✅ VERIFIED<br>
+                            <small>QR Code Scanned</small>
+                        </div>
+                    </div>
+                    <div class="rd-logo">
+                        <div class="rd-text">R&D</div>
+                        <div class="uzauto-motors-text">UZAUTO MOTORS</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back to Home -->
+            <div class="back-to-home">
+                <a href="index.html">🏠 Bosh sahifaga qaytish / Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/translations.js"></script>
+    <script>
+        // Load certificate data from URL parameters or localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVerificationData();
+        });
+        
+        function loadVerificationData() {
+            // Try to get data from URL parameters first
+            const urlParams = new URLSearchParams(window.location.search);
+            const certificateId = urlParams.get('id');
+            
+            if (certificateId) {
+                // Load from URL parameter
+                displayCertificateData(certificateId);
+            } else {
+                // Try to load from localStorage (for demo purposes)
+                const qrCodeData = localStorage.getItem('qrCodeData');
+                if (qrCodeData) {
+                    try {
+                        const data = JSON.parse(qrCodeData);
+                        displayCertificateData(data.certificateId, data);
+                    } catch (e) {
+                        console.error('Error parsing QR code data:', e);
+                        displayDefaultData();
+                    }
+                } else {
+                    displayDefaultData();
+                }
+            }
+        }
+        
+        function displayCertificateData(certId, data = null) {
+            document.getElementById('certificateId').textContent = certId;
+            
+            if (data) {
+                document.getElementById('issueDate').textContent = data.date;
+                document.getElementById('testScore').textContent = `${data.score}/${data.totalQuestions}`;
+                document.getElementById('recipientName').textContent = data.visitorName;
+            }
+        }
+        
+        function displayDefaultData() {
+            document.getElementById('certificateId').textContent = 'CERT-0000';
+            document.getElementById('issueDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('testScore').textContent = '8/10';
+            document.getElementById('recipientName').textContent = 'Demo Visitor';
+        }
+        
+        function handleLogoError(img) {
+            img.style.display = 'none';
+            img.nextElementSibling.style.display = 'flex';
+        }
+    </script>
+</body>
+</html> 

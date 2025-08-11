@@ -9,135 +9,135 @@ let userScore = 0;
 let passingScore = 8;
 let showCertificate = false;
 
-// Correct answers (0-based index)
-const correctAnswers = [3, 2, 1, 2, 1, 2, 1, 1, 2, 3];
+// Correct answers (0-based index) - Updated for new R&D center questions
+const correctAnswers = [2, 3, 0, 1, 1, 3, 2, 2, 1, 3];
 
-// Quiz questions in all languages (exact from Vue.js template)
+// Quiz questions in all languages (Updated R&D center questions)
 const questions = {
     uz: [
         {
-            question: '"UzAutoMotors" AJ korxonasi (avvalgi nomi GM Uzbekistan) qachon tashkil topgan?',
-            options: ['1995-yil 18-iyun', '1996-yil 19-iyun', '1996-yil 19-iyul', '1995-yil 19-iyul']
+            question: 'R&D markazining hozirdagi rahbari kim?',
+            options: ['Bahtiyor Uraymov', 'Timur Hamrayev', 'Saidbek Mamadaliyev', 'Fahriddin Otaxonov']
         },
         {
-            question: 'Uz-DaewooAuto kompaniyasi qaysi mamlakat bilan hamkorlikda tashkil etildi?',
-            options: ['Qozog\'iston', 'Rossiya', 'Koreya', 'O\'zbekiston']
+            question: 'R&D center nechanchi yilda tashkil etilgan?',
+            options: ['2024-yil', '2022-yil', '2023-yil', '2025-yil']
         },
         {
-            question: 'UzAuto Motors qaysi yilda yangi strategiyani qabul qildi?',
-            options: ['2018-yil', '2019-yil', '2020-yil', '2021-yil']
+            question: 'R&D center nechta yo\'nalish bo\'yicha faoliyat olib boradi?',
+            options: ['4', '2', '3', '5']
         },
         {
-            question: 'Kompaniyaning asosiy missiyasi nima?',
-            options: ['Foyda olish', 'Avtomobil ishlab chiqarish', 'Mijozlarni qondirish', 'Eksport qilish']
+            question: 'R&D centerda faoliyat olib bormaydigan yo\'nalishni belgilang',
+            options: ['Sanoat tizimlari muhandisligi', 'Texnologik qo\'llab-quvvatlash muhandisligi', 'Qadoqalsh muhandisligi', 'Qolipsozlik muhandisligi']
         },
         {
-            question: 'UzAuto Academy nechta o\'quv dasturiga ega?',
-            options: ['5 ta', '7 ta', '10 ta', '12 ta']
+            question: 'Markazda nechta muhandis va rahbarlar faoliyat olib boradi?',
+            options: ['127', '120', '95', '125']
         },
         {
-            question: 'Kompaniyaning yillik ishlab chiqarish quvvati necha dona?',
-            options: ['50,000 dona', '75,000 dona', '100,000 dona', '125,000 dona']
+            question: 'Markazning O\'zbek modelini ishlab chiqarish rejasi nechanchi yilgacha maqsad qlib olingan?',
+            options: ['2026-yil', '2027-yil', '2029-yil', '2030-yil']
         },
         {
-            question: 'UzAuto Motors nechta mamlakatga eksport qiladi?',
-            options: ['15 ta', '20 ta', '25 ta', '30 ta']
+            question: 'Markaz qaysi horiiy kompaniyalar bilan hamkorlikni yo\'lga qo\'ygan?',
+            options: ['Alfa', 'Betta', 'Gamma', 'Delta']
         },
         {
-            question: 'Kompaniyaning eng mashhur modeli qaysi?',
-            options: ['Chevrolet Spark', 'Chevrolet Cobalt', 'Chevrolet Malibu', 'Chevrolet Tracker']
+            question: 'Qolipsozlik muhandisligi bo\'limi asosan qaysi davlat mutahassislari bilan tajrib almashadi?',
+            options: ['Qozoqiston', 'Turkiya', 'Italiya', 'Rossiya']
         },
         {
-            question: 'UzAuto Motors nechta xodimga ish beradi?',
-            options: ['5,000 ta', '7,500 ta', '10,000 ta', '12,500 ta']
+            question: 'Xorijiy va mahalliy narxlarni solishtirish orqali Korxonaga foyda keltiruvchi bo\'lim qaysi?',
+            options: ['Qolipsozlik bo\'limi', 'Benchmarking bo\'limi', 'Cost engenireng bo\'limi', 'Taqqoslov va Taxlil bo\'limi']
         },
         {
-            question: 'Kompaniyaning kelajakdagi rejasi nima?',
-            options: ['Yangi zavod qurish', 'Elektr avtomobillari', 'Yangi modellar', 'Barchasi']
+            question: 'Intellektual boshqaruv texnologiyalari bo\'linmasi qaysi boshqarma tarkibiga kiradi?',
+            options: ['Tizimlarni rivojlantirish', 'Benchmarking', 'Ilmiy-texnik tadqiqotlar', 'Sanoat tizimlari muhandisligi']
         }
     ],
     ru: [
         {
-            question: 'Когда было создано СП "UzAutoMotors" (бывшее GM Uzbekistan)?',
-            options: ['18 июня 1995', '19 июня 1996', '19 июля 1996', '19 июля 1995']
+            question: 'Кто является нынешним руководителем R&D центра?',
+            options: ['Бахтиёр Ураймов', 'Тимур Хамраев', 'Саидбек Мамадалиев', 'Фахриддин Отахонов']
         },
         {
-            question: 'С какой страной создана компания Uz-DaewooAuto?',
-            options: ['Казахстан', 'Россия', 'Корея', 'Узбекистан']
+            question: 'В каком году был создан R&D центр?',
+            options: ['2024 год', '2022 год', '2023 год', '2025 год']
         },
         {
-            question: 'В каком году UzAuto Motors приняла новую стратегию?',
-            options: ['2018 год', '2019 год', '2020 год', '2021 год']
+            question: 'По скольким направлениям работает R&D центр?',
+            options: ['4', '2', '3', '5']
         },
         {
-            question: 'Какова основная миссия компании?',
-            options: ['Получение прибыли', 'Производство автомобилей', 'Удовлетворение клиентов', 'Экспорт']
+            question: 'Укажите направление, по которому R&D центр не ведет деятельность',
+            options: ['Инженерия промышленных систем', 'Инженерия технологической поддержки', 'Инженерия упаковки', 'Инженерия литейного производства']
         },
         {
-            question: 'Сколько учебных программ имеет UzAuto Academy?',
-            options: ['5', '7', '10', '12']
+            question: 'Сколько инженеров и руководителей работает в центре?',
+            options: ['127', '120', '95', '125']
         },
         {
-            question: 'Какова годовая производственная мощность компании?',
-            options: ['50,000 единиц', '75,000 единиц', '100,000 единиц', '125,000 единиц']
+            question: 'К какому году планируется производство узбекской модели в центре?',
+            options: ['2026 год', '2027 год', '2029 год', '2030 год']
         },
         {
-            question: 'В сколько стран экспортирует UzAuto Motors?',
-            options: ['15 стран', '20 стран', '25 стран', '30 стран']
+            question: 'С какими зарубежными компаниями центр наладил сотрудничество?',
+            options: ['Альфа', 'Бетта', 'Гамма', 'Дельта']
         },
         {
-            question: 'Какая самая популярная модель компании?',
-            options: ['Chevrolet Spark', 'Chevrolet Cobalt', 'Chevrolet Malibu', 'Chevrolet Tracker']
+            question: 'Специалистами какой страны в основном обменивается отдел инженерии литейного производства?',
+            options: ['Казахстан', 'Турция', 'Италия', 'Россия']
         },
         {
-            question: 'Сколько сотрудников работает в UzAuto Motors?',
-            options: ['5,000', '7,500', '10,000', '12,500']
+            question: 'Какой отдел приносит прибыль предприятию путем сравнения зарубежных и местных цен?',
+            options: ['Отдел литейного производства', 'Отдел бенчмаркинга', 'Отдел cost engineering', 'Отдел анализа и оценки']
         },
         {
-            question: 'Каковы планы компании на будущее?',
-            options: ['Строительство нового завода', 'Электромобили', 'Новые модели', 'Все перечисленное']
+            question: 'В состав какого управления входит отдел интеллектуальных технологий управления?',
+            options: ['Развитие систем', 'Бенчмаркинг', 'Научно-технические исследования', 'Инженерия промышленных систем']
         }
     ],
     en: [
         {
-            question: 'When was "UzAutoMotors" JV (formerly GM Uzbekistan) established?',
-            options: ['June 18, 1995', 'June 19, 1996', 'July 19, 1996', 'July 19, 1995']
+            question: 'Who is the current head of the R&D center?',
+            options: ['Bahtiyor Uraymov', 'Timur Hamrayev', 'Saidbek Mamadaliyev', 'Fahriddin Otaxonov']
         },
         {
-            question: 'With which country was Uz-DaewooAuto company established?',
-            options: ['Kazakhstan', 'Russia', 'Korea', 'Uzbekistan']
+            question: 'In which year was the R&D center established?',
+            options: ['2024', '2022', '2023', '2025']
         },
         {
-            question: 'In which year did UzAuto Motors adopt a new strategy?',
-            options: ['2018', '2019', '2020', '2021']
+            question: 'How many directions does the R&D center operate in?',
+            options: ['4', '2', '3', '5']
         },
         {
-            question: 'What is the main mission of the company?',
-            options: ['Profit making', 'Car manufacturing', 'Customer satisfaction', 'Export']
+            question: 'Identify the direction in which the R&D center does not operate',
+            options: ['Industrial Systems Engineering', 'Technological Support Engineering', 'Packaging Engineering', 'Foundry Engineering']
         },
         {
-            question: 'How many training programs does UzAuto Academy have?',
-            options: ['5', '7', '10', '12']
+            question: 'How many engineers and managers work in the center?',
+            options: ['127', '120', '95', '125']
         },
         {
-            question: 'What is the annual production capacity of the company?',
-            options: ['50,000 units', '75,000 units', '100,000 units', '125,000 units']
+            question: 'By which year is the production of the Uzbek model planned in the center?',
+            options: ['2026', '2027', '2029', '2030']
         },
         {
-            question: 'To how many countries does UzAuto Motors export?',
-            options: ['15 countries', '20 countries', '25 countries', '30 countries']
+            question: 'With which foreign companies has the center established cooperation?',
+            options: ['Alpha', 'Beta', 'Gamma', 'Delta']
         },
         {
-            question: 'What is the most popular model of the company?',
-            options: ['Chevrolet Spark', 'Chevrolet Cobalt', 'Chevrolet Malibu', 'Chevrolet Tracker']
+            question: 'With specialists from which country does the Foundry Engineering department mainly exchange experience?',
+            options: ['Kazakhstan', 'Turkey', 'Italy', 'Russia']
         },
         {
-            question: 'How many employees work at UzAuto Motors?',
-            options: ['5,000', '7,500', '10,000', '12,500']
+            question: 'Which department brings profit to the enterprise by comparing foreign and local prices?',
+            options: ['Foundry Department', 'Benchmarking Department', 'Cost Engineering Department', 'Analysis and Assessment Department']
         },
         {
-            question: 'What are the company\'s future plans?',
-            options: ['Building new factory', 'Electric vehicles', 'New models', 'All of the above']
+            question: 'Which management does the Intelligent Control Technologies division belong to?',
+            options: ['Systems Development', 'Benchmarking', 'Scientific and Technical Research', 'Industrial Systems Engineering']
         }
     ]
 };
