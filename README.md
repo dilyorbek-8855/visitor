@@ -1,183 +1,216 @@
-# Visitor Registration & Quiz System
+# Visitor Registration System
 
-A multi-language visitor registration and quiz system built with pure HTML, CSS, and JavaScript. Features a professional welcome page with director profile, visitor registration form, 10-question quiz, and certificate generation in 3 languages (Uzbek, Russian, English).
+A modern, multi-language visitor registration and quiz system built with Vue.js 3, featuring a professional certificate generation system.
 
-## 🚀 Quick Start
+## ✨ Features
 
-### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- No server required - works with direct file access
+- **Multi-language Support**: Uzbek, Russian, and English
+- **Visitor Registration**: Collect visitor information with form validation
+- **Interactive Quiz**: 10-question test with progress tracking
+- **Smart Certificate System**: 
+  - Website version: Shows director name and title
+  - Printed version: Includes QR code for verification
+- **QR Code Verification**: Scan to verify certificate authenticity
+- **Responsive Design**: Works on all devices
+- **Docker Support**: Easy deployment and development
 
-### Running the Application
+## 🏗️ Tech Stack
 
-1. **Open the application:**
-   - Simply double-click `index.html` to open in your browser
-   - Or open `index.html` directly in any web browser
-
-2. **Alternative methods:**
-   - Use Live Server extension in VS Code
-   - Use any local HTTP server (Python, Node.js, etc.)
-
-### Development
-
-- The application works with direct file access
-- No build process required
-- No dependencies to install
-- Mobile-responsive design
-- Cross-browser compatible
-
-## 🛠️ Tech Stack
-
-- **HTML5** - Semantic markup structure
-- **CSS3** - Modern styling with Grid & Flexbox
-- **JavaScript (ES6+)** - Pure vanilla JavaScript
-- **Local Storage** - Data persistence between pages
-- **Responsive Design** - Mobile-first approach
+- **Frontend**: Vue.js 3 (Composition API)
+- **State Management**: Pinia
+- **Routing**: Vue Router 4
+- **Build Tool**: Vite
+- **Styling**: CSS3 with modern features
+- **Containerization**: Docker & Docker Compose
+- **Package Manager**: npm
 
 ## 📁 Project Structure
 
 ```
 visitor/
-├── index.html              # Welcome page (main entry point)
-├── quiz.html              # Quiz page
-├── certificate.html       # Certificate page
-├── css/
-│   ├── style.css         # Global styles
-│   ├── welcome.css       # Welcome page styles
-│   ├── quiz.css          # Quiz page styles
-│   └── certificate.css   # Certificate page styles
-├── js/
-│   ├── translations.js   # Multi-language content
-│   ├── welcome.js        # Welcome page functionality
-│   ├── quiz.js           # Quiz functionality
-│   └── certificate.js    # Certificate functionality
-├── images/
-│   ├── director.png      # Director's profile image
-│   ├── building.jpg      # Company building image
-│   └── logo.png         # Company logo
-├── .gitignore            # Git ignore rules
-└── README.md            # This file
+├── src/
+│   ├── assets/
+│   │   └── images/          # All project images
+│   │       ├── building.jpg
+│   │       ├── certificate.png
+│   │       ├── director.png
+│   │       └── logo.png
+│   ├── components/          # Vue components
+│   │   ├── Welcome.vue      # Registration form
+│   │   ├── Quiz.vue         # Quiz interface
+│   │   └── Certificate.vue  # Certificate display
+│   ├── stores/              # Pinia stores
+│   │   ├── visitor.js       # Visitor data & quiz state
+│   │   └── translations.js  # Multi-language texts
+│   ├── App.vue              # Root component
+│   └── main.js              # Application entry point
+├── Dockerfile               # Docker image configuration
+├── docker-compose.yml       # Docker services orchestration
+├── package.json             # Dependencies & scripts
+├── vite.config.js           # Vite configuration
+└── index.html               # HTML entry point
 ```
 
-## 🎨 Features
+## 🚀 Quick Start with Docker
 
-### 📋 Welcome Page
-- **Multi-Language Support** - Uzbek, Russian, and English translations
-- **Professional Layout** - Blue director panel + white registration form
-- **Responsive Design** - Works on all device sizes
-- **Modern UI** - Beautiful gradient design with centered layouts
-- **Director Profile** - Displays director image with fallback initials
-- **Company Logo** - Professional branding integration
+### Prerequisites
+- Docker
+- Docker Compose
 
-### 🧠 Quiz System
-- **10 Static Questions** - Multi-language questions about UzAutoMotors
-- **Progress Tracking** - Real-time progress bar (0-100%)
-- **Score Calculation** - Automatic scoring with pass/fail logic
-- **Navigation** - Previous/Next question navigation
-- **Validation** - Ensures all questions are answered
-- **Passing Score** - 8 out of 10 questions required to pass
+### 1. Clone and Navigate
+```bash
+git clone <repository-url>
+cd visitor
+```
 
-### 🏆 Certificate System
-- **Dedicated Certificate Page** - Beautiful certificate display
-- **Professional Design** - Matches provided certificate template
-- **R&D Center Branding** - Research & Development Center branding
-- **Print Functionality** - Direct browser print integration
-- **Certificate Number** - Auto-generated unique certificate numbers
-- **Social Media Integration** - @uzauto_rd_center handles
-- **Multi-language Support** - Certificate text in all languages
+### 2. Start the Application
+```bash
+docker-compose up --build
+```
 
-### 🔄 Navigation Flow
-1. **Welcome Page** (`index.html`) - Visitor registration
-2. **Quiz Page** (`quiz.html`) - 10-question test
-3. **Certificate Page** (`certificate.html`) - Results and certificate
+### 3. Access the Application
+Open your browser and navigate to: `http://localhost:5173`
 
-## 🌐 Multi-Language Support
+## 🛠️ Development Setup
+
+### 1. Install Dependencies
+```bash
+npm install
+```
+
+### 2. Start Development Server
+```bash
+npm run dev
+```
+
+### 3. Build for Production
+```bash
+npm run build
+```
+
+## 🌍 Multi-language Support
 
 The application supports three languages:
-- **Uzbek (O'z)** - Default language
-- **Russian (Ру)** - Russian translation
-- **English (En)** - English translation
+- **Uzbek (O'z)**: Primary language
+- **Russian (Ру)**: Secondary language  
+- **English (En)**: International language
 
-All content, including:
-- Welcome messages
-- Form labels
-- Quiz questions and answers
-- Certificate text
-- Navigation buttons
+All text content is centralized in `src/stores/translations.js` for easy maintenance.
 
-## 📱 Responsive Design
+## 📝 Quiz System
 
-- **Desktop** - Full two-panel layout
-- **Tablet** - Adaptive layout with maintained proportions
-- **Mobile** - Single-column layout for optimal mobile experience
+- **10 Questions**: Static questions in all three languages
+- **Progress Tracking**: Visual progress bar with percentage
+- **Scoring**: Pass threshold set at 8/10 correct answers
+- **Navigation**: Previous/Next buttons with proper state management
 
-## 🎯 Key Features
+## 🎓 Certificate System
 
-### ✅ **Easy Deployment**
-- No build process required
-- Works with any web server
-- Compatible with GitHub Pages, Netlify, Vercel
-- Direct file access support
+### Website Display
+- Certificate title and purpose
+- Recipient name
+- Issuing authority
+- Director name and title
+- Professional appearance
 
-### ✅ **Professional Structure**
-- Modular CSS files
-- Organized JavaScript
-- Clean HTML structure
-- Separation of concerns
+### Printed Version
+- All certificate content
+- QR code for verification
+- Clean, printable layout
+- No action buttons
 
-### ✅ **Cross-Browser Compatible**
-- Works in all modern browsers
-- Progressive enhancement
-- Graceful degradation
-- No framework dependencies
+### QR Code Features
+- Links to certificate verification page
+- Includes visitor name and certificate ID
+- Works on both localhost and production servers
+- Automatic domain detection
 
-## 🚀 Deployment Options
+## 🔄 Data Flow
 
-### GitHub Pages
-1. Push code to GitHub repository
-2. Enable GitHub Pages in repository settings
-3. Select source branch (usually `main` or `gh-pages`)
+1. **Welcome Page**: Collects visitor information
+2. **Quiz Page**: Administers test and tracks progress
+3. **Certificate Page**: Generates and displays certificate
+4. **Pinia Store**: Manages all application state
+5. **Local Storage**: Persists data between sessions
 
-### Netlify
-1. Connect GitHub repository to Netlify
-2. Build command: (leave empty - no build required)
-3. Publish directory: `.` (root directory)
+## 🎨 Styling
 
-### Local Development
-1. Clone the repository
-2. Open `index.html` in browser
-3. Start developing!
+- **Modern CSS**: Flexbox, Grid, and modern features
+- **Responsive Design**: Mobile-first approach
+- **Print Media Queries**: Optimized for printing
+- **Professional Layout**: Two-panel design with proper spacing
 
-## 📝 Usage
+## 🐳 Docker Management
 
-1. **Open the application** by double-clicking `index.html`
-2. **Select language** using the dropdown in the top-right
-3. **Fill out the registration form** with visitor information
-4. **Complete the 10-question quiz** about UzAutoMotors
-5. **View results** - Pass (8+ correct) or Fail
-6. **Print certificate** if passed (direct browser print)
+### Useful Commands
+```bash
+# Start application
+docker-compose up -d
 
-## 🔧 Customization
+# View logs
+docker-compose logs -f
 
-### Adding New Languages
-1. Edit `js/translations.js`
-2. Add new language object with all translations
-3. Update language selector in HTML files
+# Stop application
+docker-compose down
 
-### Modifying Questions
-1. Edit `js/quiz.js`
-2. Update the `questions` array
-3. Add corresponding translations in `translations.js`
+# Rebuild and start
+docker-compose up --build
 
-### Styling Changes
-1. Modify CSS files in the `css/` directory
-2. Global styles in `style.css`
-3. Page-specific styles in respective CSS files
+# Check container status
+docker ps
+```
 
-## 📄 License
+### Container Details
+- **Name**: `visitor-frontend`
+- **Port**: `5173`
+- **Volume Mounting**: Live code reloading
+- **Environment**: Development mode
 
-This project is for internal use at UzAutoMotors R&D Center.
+## 🚀 Deployment
+
+### Production Build
+```bash
+npm run build
+```
+
+### Docker Production
+```bash
+# Update Dockerfile for production
+docker build -t visitor-app .
+docker run -p 80:80 visitor-app
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+- `NODE_ENV`: Development/Production mode
+- `VITE_APP_TITLE`: Application title
+- `VITE_API_URL`: API endpoint (if needed)
+
+### Vite Configuration
+- Host: `0.0.0.0` (Docker compatibility)
+- Port: `5173`
+- Polling: Enabled for Docker development
+
+## 📱 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## 🤝 Contributing
 
-For internal development team use only. 
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support and questions, please open an issue in the repository. 
