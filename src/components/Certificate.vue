@@ -34,7 +34,7 @@
           <!-- Director Name and Signature (Website Only) -->
           <div class="director-info" v-if="!showPrintVersion">
             <div class="director-name">S.A.Mamadaliyev</div>
-            <div class="director-title">Direksiya direktori</div>
+            <div class="director-title">{{ translations[currentLanguage].directorTitle }}</div>
           </div>
           
           <!-- QR Code (Print Only) -->
@@ -155,8 +155,7 @@ export default {
           // This is a QR code scan - create temporary visitor data
           visitorStore.visitorData = {
             firstName: nameFromUrl.split(' ')[0] || '',
-            lastName: nameFromUrl.split(' ').slice(1).join(' ') || '',
-            middleName: ''
+            lastName: nameFromUrl.split(' ').slice(1).join(' ') || ''
           }
           visitorStore.certificateNumber = idFromUrl
           visitorStore.quizCompleted = true

@@ -43,18 +43,7 @@
           <!-- Registration Form -->
           <form @submit.prevent="handleSubmit" class="registration-form">
             <div class="form-group">
-              <label for="lastName">{{ translations[currentLanguage].lastName }} *</label>
-              <input 
-                type="text" 
-                id="lastName" 
-                v-model="formData.lastName"
-                required
-                class="form-input"
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="firstName">{{ translations[currentLanguage].firstName }} *</label>
+              <label for="firstName">{{ translations[currentLanguage].firstName }}</label>
               <input 
                 type="text" 
                 id="firstName" 
@@ -65,11 +54,12 @@
             </div>
 
             <div class="form-group">
-              <label for="middleName">{{ translations[currentLanguage].middleName }}</label>
+              <label for="lastName">{{ translations[currentLanguage].lastName }}</label>
               <input 
                 type="text" 
-                id="middleName" 
-                v-model="formData.middleName"
+                id="lastName" 
+                v-model="formData.lastName"
+                required
                 class="form-input"
               >
             </div>
@@ -100,8 +90,7 @@ export default {
     
     const formData = reactive({
       lastName: '',
-      firstName: '',
-      middleName: ''
+      firstName: ''
     })
     
     // Watch language changes and update store
@@ -110,6 +99,17 @@ export default {
     })
     
     const handleSubmit = () => {
+      // Validate that both fields are filled
+      if (!formData.lastName.trim() || !formData.firstName.trim()) {
+        const messages = {
+          uz: 'Iltimos, ikkala maydonni ham to\'ldiring',
+          ru: 'Пожалуйста, заполните оба поля',
+          en: 'Please fill in both fields'
+        }
+        alert(messages[currentLanguage.value] || messages.en)
+        return
+      }
+      
       // Set visitor data in store
       visitorStore.setVisitorData({
         ...formData,

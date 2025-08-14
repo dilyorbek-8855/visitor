@@ -2,11 +2,10 @@ import { defineStore } from 'pinia'
 
 export const useVisitorStore = defineStore('visitor', {
   state: () => ({
-    // Visitor information
+    // Visitor data
     visitorData: {
       lastName: '',
       firstName: '',
-      middleName: '',
       language: 'uz'
     },
     
@@ -28,12 +27,8 @@ export const useVisitorStore = defineStore('visitor', {
   getters: {
     // Get full visitor name
     fullName: (state) => {
-      const { lastName, firstName, middleName } = state.visitorData
-      let name = `${lastName} ${firstName}`
-      if (middleName) {
-        name += ` ${middleName}`
-      }
-      return name
+      const { lastName, firstName } = state.visitorData
+      return `${lastName} ${firstName}`
     },
     
     // Get current language
@@ -101,17 +96,17 @@ export const useVisitorStore = defineStore('visitor', {
     
     // Reset all data
     resetAll() {
+      const currentLang = this.visitorData.language
       this.visitorData = {
         lastName: '',
         firstName: '',
-        middleName: '',
-        language: 'uz'
+        language: currentLang
       }
       this.resetQuiz()
       this.certificateData = {
         certificateNumber: '',
         date: '',
-        language: 'uz'
+        language: currentLang
       }
     }
   }

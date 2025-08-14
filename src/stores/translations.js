@@ -1,6 +1,7 @@
 export const translations = {
   uz: {
-    // Welcome page
+    welcomeTitle: 'Xush kelibsiz!',
+    welcomeSubtitle: 'Kompaniyamizga tashrif buyurganingiz uchun rahmat',
     directorTitle: 'Bosh Direktor',
     welcomeMessage: 'Hurmatli mehmon! Kompaniyamizga xush kelibsiz, sizni tashrifingizdan hursandmiz.',
     requestMessage: 'Korxona to\'g\'risida fikringizni bildirishingizni so\'raymiz. Sizning fikringiz biz uchun muhim!',
@@ -8,8 +9,7 @@ export const translations = {
     sincerely: 'Hurmat bilan',
     lastName: 'Familyangiz',
     firstName: 'Ismingiz',
-    middleName: 'Sharifingiz',
-    enterTest: 'Testga kirish',
+    enterTest: 'Testni boshlash',
     
     // Quiz page
     testTitle: 'Test jarayoni to\'g\'risida',
@@ -24,6 +24,7 @@ export const translations = {
     certificateTitle: 'SERTIFIKAT',
     certificatePurpose: 'R&D centerga tashrif buyurgan hamda tanishuv testidan muvoffaqiyatli o\'tganligi uchun',
     certificateIssuer: 'Texnik rivojlantirish direksiyasi direktori tomonidan berildi.',
+    directorTitle: 'Direksiya direktori',
     printCertificate: 'Sertifikatni chop etish',
     backToQuiz: 'Testga qaytish',
     startOver: 'Boshidan boshlash'
@@ -38,7 +39,6 @@ export const translations = {
     sincerely: 'С уважением',
     lastName: 'Фамилия',
     firstName: 'Имя',
-    middleName: 'Отчество',
     enterTest: 'Начать тест',
     
     // Quiz page
@@ -54,6 +54,7 @@ export const translations = {
     certificateTitle: 'СЕРТИФИКАТ',
     certificatePurpose: 'За посещение R&D центра и успешное прохождение ознакомительного теста',
     certificateIssuer: 'Выдано директором дирекции технического развития',
+    directorTitle: 'Директор технического развития',
     printCertificate: 'Распечатать сертификат',
     backToQuiz: 'Вернуться к тесту',
     startOver: 'Начать заново'
@@ -68,7 +69,6 @@ export const translations = {
     sincerely: 'Sincerely',
     lastName: 'Last Name',
     firstName: 'First Name',
-    middleName: 'Middle Name',
     enterTest: 'Start Test',
     
     // Quiz page
@@ -84,6 +84,7 @@ export const translations = {
     certificateTitle: 'CERTIFICATE',
     certificatePurpose: 'For visiting the R&D center and successfully passing the familiarization test',
     certificateIssuer: 'Issued by the Director of Technical Development Directorate',
+    directorTitle: 'Technical Development Director',
     printCertificate: 'Print Certificate',
     backToQuiz: 'Back to Quiz',
     startOver: 'Start Over'
