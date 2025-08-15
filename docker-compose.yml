@@ -1,6 +1,7 @@
 services:
   visitor-frontend:
     build: .
+    image: visitor-frontend
     container_name: visitor-frontend
     ports:
       - "5173:5173"
