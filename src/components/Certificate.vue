@@ -88,11 +88,10 @@ export default {
       
       // Include visitor data in the URL
       const visitorName = encodeURIComponent(visitorStore.fullName)
-      const certificateId = visitorStore.certificateNumber || 'CERT' + Date.now()
-      const path = `/certificate?name=${visitorName}&id=${certificateId}`
+      const path = `/certificate?name=${visitorName}`
       
       // Create the full URL with visitor data
-      const certificateUrl = `${baseUrl}#${path}`
+      const certificateUrl = `${baseUrl}${path}`
       
       // Using a free QR code API service
       qrCodeUrl.value = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(certificateUrl)}`
@@ -245,26 +244,19 @@ export default {
       // Check if visitor data exists and quiz is completed
       if (!visitorStore.visitorData.lastName || !visitorStore.isQuizCompleted) {
         // Check if we have data in URL parameters (from QR code scan)
-        // With hash routing, params are in the hash
         let nameFromUrl = null
-        let idFromUrl = null
         
-        const hash = window.location.hash
-        if (hash && hash.includes('?')) {
-          const hashParams = new URLSearchParams(hash.split('?')[1])
-          nameFromUrl = hashParams.get('name')
-          idFromUrl = hashParams.get('id')
-        }
+        const urlParams = new URLSearchParams(window.location.search)
+        nameFromUrl = urlParams.get('name')
         
-        if (nameFromUrl && idFromUrl) {
+        if (nameFromUrl) {
           // This is a QR code scan - create temporary visitor data
           visitorStore.visitorData = {
             firstName: nameFromUrl.split(' ')[0] || '',
             lastName: nameFromUrl.split(' ').slice(1).join(' ') || ''
           }
-          visitorStore.certificateNumber = idFromUrl
           visitorStore.quizCompleted = true
-          console.log('Certificate accessed via QR code:', { name: nameFromUrl, id: idFromUrl })
+          console.log('Certificate accessed via QR code:', { name: nameFromUrl })
         } else {
           // No data available, redirect to welcome
           router.push('/')

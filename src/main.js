@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 
 // Import components
@@ -10,7 +10,7 @@ import Certificate from './components/Certificate.vue'
 
 // Create router
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', component: Welcome },
     { path: '/quiz', component: Quiz },
