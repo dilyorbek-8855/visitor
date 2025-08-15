@@ -137,128 +137,128 @@ export default {
     const questions = {
       uz: [
         {
-          question: 'R&D markazining hozirdagi rahbari kim?',
-          options: ['S.A.Mamadaliyev', 'A.N.Abdullayev', 'J.Kovach', 'M.Umarov']
+          question: 'R&D markazining amaldagi rahbari kim?',
+          options: ['Bahtiyor Uraymov', 'Timur Hamrayev', 'Saidbek Mamadaliyev', 'Fahriddin Otaxonov']
+        },
+        {
+          question: 'R&D center nechanchi yilda tashkil etilgan?',
+          options: ['2024-yil', '2022-yil', '2023-yil', '2025-yil']
         },
         {
           question: 'R&D markazida qanday yo\'nalishlar bo\'yicha ishlar olib boriladi?',
-          options: ['Avtomobil ishlab chiqarish', 'Texnik rivojlantirish', 'Marketing va sotuv', 'Barcha yo\'nalishlar']
+          options: ['Qolipsozlik muhandisligi', 'Qadoqlash muhandisligi', 'Sanoat tizimlari muhandisligi', 'Barcha javoblar to\'g\'ri']
         },
         {
-          question: 'R&D markazida qancha mutaxassis ishlaydi?',
-          options: ['50 dan kam', '50-100', '100-200', '200 dan ko\'p']
+          question: 'R&D centerda faoliyat olib bormaydigan yo\'nalishni belgilang',
+          options: ['Cost engineering', 'Texnologik qo\'llab-quvvatlash muhandisligi', 'Reverse engieering', 'Taqqoslov va Tahlil']
         },
         {
-          question: 'R&D markazida qanday loyihalar amalga oshiriladi?',
-          options: ['Faqat avtomobil loyihalari', 'Texnik innovatsiyalar', 'Barcha turdagi loyihalar', 'Faqat tadqiqot']
+          question: 'Markazda necha nafar muhandis va rahbarlar faoliyat olib boradi?',
+          options: ['100 nafardan kam', '100 nafardan ko\'p', '80 nafardan ko\'p', '80 nafardan kam']
         },
         {
-          question: 'R&D markazida qanday texnologiyalar qo\'llaniladi?',
-          options: ['Eski texnologiyalar', 'Zamonaviy texnologiyalar', 'Archaik usullar', 'Hech qanday']
+          question: 'Markazning O\'zbek modelini ishlab chiqarish rejasi nechanchi yilgacha maqsad qilib olingan?',
+          options: ['2026-yil', '2027-yil', '2029-yil', '2030-yil']
         },
         {
-          question: 'R&D markazida qanday hamkorlik amalga oshiriladi?',
-          options: ['Faqat ichki hamkorlik', 'Xalqaro hamkorlik', 'Mahalliy hamkorlik', 'Barcha turdagi hamkorlik']
+          question: 'R&D markazida qanday hamkorliklar amalga oshiriladi?',
+          options: ['Mahalliy hamkorliklar', 'Ichki hamkorliklar', 'Xorijiy hamkorliklar', 'Barcha javoblar to\'g\'ri']
         },
         {
-          question: 'R&D markazida qanday natijalar erishilgan?',
-          options: ['Hech qanday natija yo\'q', 'Bir necha natija', 'Ko\'p natijalar', 'Ajoyib natijalar']
+          question: 'Markaz labarotoriyasida foydalaniluvchi Fanuc va Yaskawa robotlari qaysi davlatga tegishli?',
+          options: ['Koreya va Yaponiya', 'Ikkisi ham Koreya', 'Ikkisi ham Yaponiya', 'Braziliya va Yaponiya']
         },
         {
           question: 'R&D markazida qanday malakali kadrlar ishlaydi?',
-          options: ['O\'rta malakali', 'Yuqori malakali', 'Barcha darajadagi', 'Faqat boshlang\'ich']
+          options: ['Yuqori malakali', 'O\'rta malakali', 'Boshlang\'ich malakali', 'Barcha turdagi']
         },
         {
-          question: 'R&D markazida qanday jihozlardan foydalaniladi?',
-          options: ['Eski jihozlar', 'Zamonaviy jihozlar', 'Oddiy jihozlar', 'Maxsus jihozlar']
-        },
-        {
-          question: 'R&D markazida qanday kelajak rejalari mavjud?',
-          options: ['Qisqa muddatli', 'O\'rta muddatli', 'Uzoq muddatli', 'Barcha muddatli']
+          question: 'Intellektual boshqaruv texnologiyalari bo\'linmasi qaysi boshqarma tarkibiga kiradi?',
+          options: ['Tizimlarni rivojlantirish', 'Benchmarking', 'Ilmiy-texnik tadqiqotlar', 'Sanoat tizimlari muhandisligi']
         }
       ],
       ru: [
         {
-          question: 'Кто является нынешним руководителем R&D центра?',
-          options: ['С.А.Мамадалиев', 'А.Н.Абдуллаев', 'Дж.Ковач', 'М.Умаров']
+          question: 'Кто является действующим руководителем R&D центра?',
+          options: ['Бахтиёр Ураймов', 'Тимур Хамраев', 'Саидбек Мамадалиев', 'Фахриддин Отахонов']
+        },
+        {
+          question: 'В каком году был основан R&D центр?',
+          options: ['2024 год', '2022 год', '2023 год', '2025 год']
         },
         {
           question: 'По каким направлениям ведутся работы в R&D центре?',
-          options: ['Производство автомобилей', 'Техническое развитие', 'Маркетинг и продажи', 'Все направления']
+          options: ['Инженерия пресс-форм', 'Инженерия упаковки', 'Инженерия промышленных систем', 'Все ответы правильные']
         },
         {
-          question: 'Сколько специалистов работает в R&D центре?',
-          options: ['Менее 50', '50-100', '100-200', 'Более 200']
+          question: 'Укажите направление, по которому не ведется деятельность в R&D центре',
+          options: ['Cost engineering', 'Инженерия технологической поддержки', 'Reverse engineering', 'Стандартизация и анализ']
         },
         {
-          question: 'Какие проекты реализуются в R&D центре?',
-          options: ['Только автомобильные проекты', 'Технические инновации', 'Все виды проектов', 'Только исследования']
+          question: 'Сколько инженеров и руководителей работает в центре?',
+          options: ['Менее 100 человек', 'Более 100 человек', 'Более 80 человек', 'Менее 80 человек']
         },
         {
-          question: 'Какие технологии используются в R&D центре?',
-          options: ['Старые технологии', 'Современные технологии', 'Архаичные методы', 'Никакие']
+          question: 'До какого года планируется производство узбекской модели в центре?',
+          options: ['2026 год', '2027 год', '2029 год', '2030 год']
         },
         {
-          question: 'Какое сотрудничество осуществляется в R&D центре?',
-          options: ['Только внутреннее сотрудничество', 'Международное сотрудничество', 'Местное сотрудничество', 'Все виды сотрудничества']
+          question: 'Какие виды сотрудничества осуществляются в R&D центре?',
+          options: ['Местное сотрудничество', 'Внутреннее сотрудничество', 'Иностранное сотрудничество', 'Все ответы правильные']
         },
         {
-          question: 'Каких результатов достиг R&D центр?',
-          options: ['Никаких результатов', 'Несколько результатов', 'Много результатов', 'Отличные результаты']
+          question: 'Роботы Fanuc и Yaskawa, используемые в лаборатории центра, принадлежат какой стране?',
+          options: ['Корея и Япония', 'Оба из Кореи', 'Оба из Японии', 'Бразилия и Япония']
         },
         {
           question: 'Какие квалифицированные кадры работают в R&D центре?',
-          options: ['Средней квалификации', 'Высокой квалификации', 'Всех уровней', 'Только начального']
+          options: ['Высокой квалификации', 'Средней квалификации', 'Начальной квалификации', 'Всех видов']
         },
         {
-          question: 'Каким оборудованием пользуются в R&D центре?',
-          options: ['Старое оборудование', 'Современное оборудование', 'Обычное оборудование', 'Специальное оборудование']
-        },
-        {
-          question: 'Какие планы на будущее есть у R&D центра?',
-          options: ['Краткосрочные', 'Среднесрочные', 'Долгосрочные', 'Все сроки']
+          question: 'В состав какого управления входит отдел интеллектуальных технологий управления?',
+          options: ['Развитие систем', 'Benchmarking', 'Научно-технические исследования', 'Инженерия промышленных систем']
         }
       ],
       en: [
         {
           question: 'Who is the current head of the R&D center?',
-          options: ['S.A.Mamadaliyev', 'A.N.Abdullayev', 'J.Kovach', 'M.Umarov']
+          options: ['Bahtiyor Uraymov', 'Timur Hamrayev', 'Saidbek Mamadaliyev', 'Fahriddin Otaxonov']
+        },
+        {
+          question: 'In which year was the R&D center established?',
+          options: ['2024', '2022', '2023', '2025']
         },
         {
           question: 'What areas of work are conducted at the R&D center?',
-          options: ['Automobile production', 'Technical development', 'Marketing and sales', 'All areas']
+          options: ['Mold engineering', 'Packaging engineering', 'Industrial systems engineering', 'All answers are correct']
         },
         {
-          question: 'How many specialists work at the R&D center?',
-          options: ['Less than 50', '50-100', '100-200', 'More than 200']
+          question: 'Identify the area where no activity is carried out at the R&D center',
+          options: ['Cost engineering', 'Technological support engineering', 'Reverse engineering', 'Standardization and Analysis']
         },
         {
-          question: 'What projects are implemented at the R&D center?',
-          options: ['Only automobile projects', 'Technical innovations', 'All types of projects', 'Only research']
+          question: 'How many engineers and managers work at the center?',
+          options: ['Less than 100 people', 'More than 100 people', 'More than 80 people', 'Less than 80 people']
         },
         {
-          question: 'What technologies are used at the R&D center?',
-          options: ['Old technologies', 'Modern technologies', 'Archaic methods', 'None']
+          question: 'Until which year is the production of the Uzbek model planned at the center?',
+          options: ['2026', '2027', '2029', '2030']
         },
         {
-          question: 'What cooperation is carried out at the R&D center?',
-          options: ['Only internal cooperation', 'International cooperation', 'Local cooperation', 'All types of cooperation']
+          question: 'What types of cooperation are carried out at the R&D center?',
+          options: ['Local cooperation', 'Internal cooperation', 'Foreign cooperation', 'All answers are correct']
         },
         {
-          question: 'What results has the R&D center achieved?',
-          options: ['No results', 'Several results', 'Many results', 'Excellent results']
+          question: 'Fanuc and Yaskawa robots used in the center\'s laboratory belong to which country?',
+          options: ['Korea and Japan', 'Both from Korea', 'Both from Japan', 'Brazil and Japan']
         },
         {
           question: 'What qualified personnel work at the R&D center?',
-          options: ['Medium qualification', 'High qualification', 'All levels', 'Only entry level']
+          options: ['High qualification', 'Medium qualification', 'Entry level qualification', 'All types']
         },
         {
-          question: 'What equipment is used at the R&D center?',
-          options: ['Old equipment', 'Modern equipment', 'Regular equipment', 'Special equipment']
-        },
-        {
-          question: 'What future plans does the R&D center have?',
-          options: ['Short-term', 'Medium-term', 'Long-term', 'All terms']
+          question: 'Which management department includes the intelligent control technologies division?',
+          options: ['Systems development', 'Benchmarking', 'Scientific and technical research', 'Industrial systems engineering']
         }
       ]
     }
@@ -295,7 +295,7 @@ export default {
     
     const finishQuiz = () => {
       // Calculate score
-      const correctAnswers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // Debug mode
+      const correctAnswers = [2, 3, 3, 1, 1, 3, 3, 2, 0, 3] // Correct answers for new questions
       let calculatedScore = 0
       
       for (let i = 0; i < totalQuestions; i++) {

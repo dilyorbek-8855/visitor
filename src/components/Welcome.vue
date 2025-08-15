@@ -50,6 +50,7 @@
                 v-model="formData.firstName"
                 required
                 class="form-input"
+                autocomplete="off"
               >
             </div>
 
@@ -61,6 +62,7 @@
                 v-model="formData.lastName"
                 required
                 class="form-input"
+                autocomplete="off"
               >
             </div>
 

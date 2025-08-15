@@ -10,7 +10,7 @@ import Certificate from './components/Certificate.vue'
 
 // Create router
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', component: Welcome },
     { path: '/quiz', component: Quiz },

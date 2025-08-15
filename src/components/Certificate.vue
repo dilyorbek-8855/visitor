@@ -2,10 +2,10 @@
   <div class="certificate-page">
     <div class="certificate-container">
       <div class="certificate-wrapper">
-        <!-- Certificate Background Image - Different for web vs print -->
+        <!-- Certificate Background Image -->
         <img 
-          :src="currentCertificateImage" 
-          :alt="showPrintVersion ? 'Certificate (Print Version)' : 'Certificate (Web Version)'" 
+          :src="certificateImage" 
+          alt="Certificate" 
           class="certificate-image"
         >
         
@@ -31,14 +31,10 @@
             {{ translations[currentLanguage].certificateIssuer }}
           </p>
           
-          <!-- Director Name and Signature (Website Only) -->
-          <div class="director-info" v-if="!showPrintVersion">
-            <div class="director-name">S.A.Mamadaliyev</div>
-            <div class="director-title">{{ translations[currentLanguage].directorTitle }}</div>
-          </div>
+
           
-          <!-- QR Code (Print Only) -->
-          <div class="qr-code-container" v-if="showPrintVersion">
+          <!-- QR Code -->
+          <div class="qr-code-container">
             <img :src="qrCodeUrl" alt="QR Code" class="qr-code">
           </div>
         </div>
@@ -46,17 +42,6 @@
       
       <!-- Action Buttons -->
       <div class="action-buttons">
-        <!-- Debug Switch (Hidden in Production) -->
-        <div class="debug-switch">
-          <label class="debug-label">
-            <input 
-              type="checkbox" 
-              v-model="showPrintVersion" 
-              class="debug-checkbox"
-            >
-            <span class="debug-text">Debug: Show Print Version</span>
-          </label>
-        </div>
         
         <button @click="printCertificate" class="action-btn print-btn">
           {{ translations[currentLanguage].printCertificate }}
@@ -78,9 +63,8 @@ import { useRouter } from 'vue-router'
 import { useVisitorStore } from '../stores/visitor.js'
 import { translations } from '../stores/translations.js'
 
-// Import certificate images
-import certificateWeb from '../assets/images/certificate-web.png'
-import certificatePrint from '../assets/images/certificate-print.png'
+// Import certificate image
+import certificateImage from '../assets/images/certificate.png'
 
 export default {
   name: 'Certificate',
@@ -89,21 +73,18 @@ export default {
     const visitorStore = useVisitorStore()
     const currentLanguage = ref('uz')
     const qrCodeUrl = ref('')
-    const showPrintVersion = ref(false) // New ref for debug switch
-
-    // Computed property to determine which certificate image to use
-    const currentCertificateImage = computed(() => {
-      return showPrintVersion.value 
-        ? certificatePrint
-        : certificateWeb
-    })
 
     // Generate QR code for current certificate page
     const generateQRCode = () => {
-      // Get the actual domain (works for both localhost and production)
-      const protocol = window.location.protocol
-      const hostname = window.location.hostname
-      const port = window.location.port ? `:${window.location.port}` : ''
+      // Use the correct domain for production (GitHub Pages) or localhost for development
+      let baseUrl
+      if (window.location.hostname === 'localhost') {
+        // Development environment
+        baseUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`
+      } else {
+        // Production environment (GitHub Pages)
+        baseUrl = 'https://dilyorbek-8855.github.io/visitor'
+      }
       
       // Include visitor data in the URL
       const visitorName = encodeURIComponent(visitorStore.fullName)
@@ -111,24 +92,141 @@ export default {
       const path = `/certificate?name=${visitorName}&id=${certificateId}`
       
       // Create the full URL with visitor data
-      const certificateUrl = `${protocol}//${hostname}${port}${path}`
+      const certificateUrl = `${baseUrl}${path}`
       
       // Using a free QR code API service
       qrCodeUrl.value = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(certificateUrl)}`
     }
 
     const printCertificate = () => {
-      // Temporarily switch to print version before printing
-      showPrintVersion.value = true
+      // Create a print-friendly version with optimal scaling
+      const printWindow = window.open('', '_blank', 'width=800,height=600')
       
-      // Use setTimeout to ensure the DOM updates before printing
-      setTimeout(() => {
-        window.print()
-        // Switch back to web version after printing
+      // Get the certificate content
+      const certificateContent = document.querySelector('.certificate-wrapper').cloneNode(true)
+      
+      // Create print-optimized HTML
+      const printHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Certificate - ${visitorStore.fullName}</title>
+          <style>
+            @page {
+              size: A4 landscape;
+              margin: 10mm;
+            }
+            body {
+              margin: 0;
+              padding: 0;
+              background: white;
+            }
+                         .certificate-wrapper {
+               width: 100%;
+               height: 100vh;
+               position: relative;
+               transform: scale(1);
+               transform-origin: center center;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+             }
+            .certificate-image {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+            .certificate-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            }
+            .certificate-title {
+              position: absolute;
+              top: 25%;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 3.8rem;
+              font-weight: normal;
+              color: #333;
+              margin: 0;
+              text-align: center;
+            }
+            .certificate-purpose {
+              position: absolute;
+              top: 38%;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 1.1rem;
+              color: #333;
+              text-align: center;
+              line-height: 1.4;
+              max-width: 95%;
+            }
+            .recipient-name {
+              position: absolute;
+              top: calc(48% + 10px);
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 1.8rem;
+              color: #333;
+              font-weight: 600;
+              text-align: center;
+            }
+            .certificate-issuer {
+              position: absolute;
+              top: calc(55% + 10px);
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 1rem;
+              color: #333;
+              text-align: center;
+              line-height: 1.4;
+            }
+            .qr-code-container {
+              position: absolute;
+              top: calc(65% + 10px);
+              left: 50%;
+              transform: translateX(-50%);
+              text-align: center;
+            }
+            .qr-code {
+              width: 25%;
+              height: auto;
+              min-width: 100px;
+              border: 2px solid #333;
+              border-radius: 8px;
+              background: white;
+            }
+                         @media print {
+               .certificate-wrapper {
+                 transform: scale(1);
+                 transform-origin: center center;
+               }
+             }
+          </style>
+        </head>
+        <body>
+          ${certificateContent.outerHTML}
+        </body>
+        </html>
+      `
+      
+      printWindow.document.write(printHTML)
+      printWindow.document.close()
+      
+      // Wait for content to load, then print
+      printWindow.onload = () => {
         setTimeout(() => {
-          showPrintVersion.value = false
-        }, 100)
-      }, 100)
+          printWindow.print()
+          // Close the window after printing
+          setTimeout(() => {
+            printWindow.close()
+          }, 1000)
+        }, 500)
+      }
     }
 
     const backToQuiz = () => {
@@ -188,8 +286,7 @@ export default {
       printCertificate,
       backToQuiz,
       startOver,
-      showPrintVersion, // Expose the new ref
-      currentCertificateImage // Expose the new computed property
+      certificateImage
     }
   }
 }
@@ -303,27 +400,7 @@ export default {
   background: white;
 }
 
-/* Director Information Styling */
-.director-info {
-  position: absolute;
-  top: calc(78% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-}
 
-.director-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.2rem;
-}
-
-.director-title {
-  font-size: 0.8rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
 
 /* Action Buttons */
 .action-buttons {
@@ -373,44 +450,10 @@ export default {
   background: #c82333;
 }
 
-/* Debug Switch Styles */
-.debug-switch {
-  position: absolute;
-  top: 10px; /* Adjust position as needed */
-  left: 10px; /* Adjust position as needed */
-  z-index: 10; /* Ensure it's above other content */
-  background-color: #e9ecef;
-  padding: 5px 10px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
 
-.debug-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.debug-checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: #28a745; /* Customize checkbox color */
-}
-
-.debug-text {
-  font-size: 0.8rem;
-  color: #333;
-}
 
 /* Print Media Queries */
 @media print {
-  /* Hide director info in print */
-  .director-info {
-    display: none !important;
-  }
-  
   /* Show QR code in print */
   .qr-code-container {
     display: block !important;
@@ -435,8 +478,7 @@ export default {
 
 }
 
-/* Debug Switch Logic */
-/* No need for website-only and print-only classes anymore */
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
