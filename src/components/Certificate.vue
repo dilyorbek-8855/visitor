@@ -89,10 +89,10 @@ export default {
       // Include visitor data in the URL
       const visitorName = encodeURIComponent(visitorStore.fullName)
       const certificateId = visitorStore.certificateNumber || 'CERT' + Date.now()
-      const path = `#/certificate?name=${visitorName}&id=${certificateId}`
+      const path = `/certificate?name=${visitorName}&id=${certificateId}`
       
       // Create the full URL with visitor data
-      const certificateUrl = `${baseUrl}${path}`
+      const certificateUrl = `${baseUrl}#${path}`
       
       // Using a free QR code API service
       qrCodeUrl.value = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(certificateUrl)}`
@@ -245,19 +245,15 @@ export default {
       // Check if visitor data exists and quiz is completed
       if (!visitorStore.visitorData.lastName || !visitorStore.isQuizCompleted) {
         // Check if we have data in URL parameters (from QR code scan)
-        // Handle both regular search params and hash-based params
-        let urlParams = new URLSearchParams(window.location.search)
-        let nameFromUrl = urlParams.get('name')
-        let idFromUrl = urlParams.get('id')
+        // With hash routing, params are in the hash
+        let nameFromUrl = null
+        let idFromUrl = null
         
-        // If not found in search params, check hash params
-        if (!nameFromUrl || !idFromUrl) {
-          const hash = window.location.hash
-          if (hash && hash.includes('?')) {
-            const hashParams = new URLSearchParams(hash.split('?')[1])
-            nameFromUrl = hashParams.get('name')
-            idFromUrl = hashParams.get('id')
-          }
+        const hash = window.location.hash
+        if (hash && hash.includes('?')) {
+          const hashParams = new URLSearchParams(hash.split('?')[1])
+          nameFromUrl = hashParams.get('name')
+          idFromUrl = hashParams.get('id')
         }
         
         if (nameFromUrl && idFromUrl) {

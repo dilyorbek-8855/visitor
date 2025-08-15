@@ -7,17 +7,16 @@
     // Single Page Application routing fix for GitHub Pages
     // This handles direct access to routes like /certificate
     
-    // Get the current path
+    // Get the current path and search parameters
     const path = window.location.pathname;
     const search = window.location.search;
-    const hash = window.location.hash;
     
-    // If we're accessing a route directly (not the root), redirect to root with hash
+    // If we're accessing a route directly (not the root), redirect to main app
     if (path !== '/' && path !== '/index.html') {
-      // Extract the route (remove leading slash and query params)
-      const route = path.replace(/^\//, '');
+      // Extract the route (remove leading slash and any .html extension)
+      const route = path.replace(/^\//, '').replace(/\.html$/, '');
       
-      // Create the hash-based URL
+      // Create the hash-based URL that the SPA can handle
       const newUrl = window.location.origin + '/visitor/' + (search ? search : '') + '#' + route;
       
       // Redirect to the main app with the route as a hash
