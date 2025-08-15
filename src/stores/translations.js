@@ -22,9 +22,8 @@ export const translations = {
     
     // Certificate page
     certificateTitle: 'SERTIFIKAT',
-    certificatePurpose: 'R&D centerga tashrif buyurgan hamda tanishuv testidan muvoffaqiyatli o\'tganligi uchun',
+    certificatePurpose: 'R&D centerga tashrif buyurgan hamda tanishuv testidan muvaffaqiyatli o\'tganligi uchun',
     certificateIssuer: 'Texnik rivojlantirish direksiyasi direktori tomonidan berildi.',
-    directorTitle: 'Direksiya direktori',
     printCertificate: 'Sertifikatni chop etish',
     backToQuiz: 'Testga qaytish',
     startOver: 'Boshidan boshlash'
@@ -54,7 +53,6 @@ export const translations = {
     certificateTitle: 'СЕРТИФИКАТ',
     certificatePurpose: 'За посещение R&D центра и успешное прохождение ознакомительного теста',
     certificateIssuer: 'Выдано директором дирекции технического развития',
-    directorTitle: 'Директор технического развития',
     printCertificate: 'Распечатать сертификат',
     backToQuiz: 'Вернуться к тесту',
     startOver: 'Начать заново'
@@ -84,7 +82,6 @@ export const translations = {
     certificateTitle: 'CERTIFICATE',
     certificatePurpose: 'For visiting the R&D center and successfully passing the familiarization test',
     certificateIssuer: 'Issued by the Director of Technical Development Directorate',
-    directorTitle: 'Technical Development Director',
     printCertificate: 'Print Certificate',
     backToQuiz: 'Back to Quiz',
     startOver: 'Start Over'
