@@ -244,10 +244,14 @@ export default {
       // Check if visitor data exists and quiz is completed
       if (!visitorStore.visitorData.lastName || !visitorStore.isQuizCompleted) {
         // Check if we have data in URL parameters (from QR code scan)
+        // With certificate.html redirect, params are in the hash
         let nameFromUrl = null
         
-        const urlParams = new URLSearchParams(window.location.search)
-        nameFromUrl = urlParams.get('name')
+        const hash = window.location.hash
+        if (hash && hash.includes('?')) {
+          const hashParams = new URLSearchParams(hash.split('?')[1])
+          nameFromUrl = hashParams.get('name')
+        }
         
         if (nameFromUrl) {
           // This is a QR code scan - create temporary visitor data
