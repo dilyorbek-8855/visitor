@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Visitor Registration System</title>
+  <script>
+    // Single Page Application routing fix for GitHub Pages
+    // This handles direct access to routes like /certificate
+    
+    // Get the current path
+    const path = window.location.pathname;
+    const search = window.location.search;
+    const hash = window.location.hash;
+    
+    // If we're accessing a route directly (not the root), redirect to root with hash
+    if (path !== '/' && path !== '/index.html') {
+      // Extract the route (remove leading slash and query params)
+      const route = path.replace(/^\//, '');
+      
+      // Create the hash-based URL
+      const newUrl = window.location.origin + '/visitor/' + (search ? search : '') + '#' + route;
+      
+      // Redirect to the main app with the route as a hash
+      window.location.href = newUrl;
+    } else {
+      // We're at the root, just redirect to the main app
+      window.location.href = window.location.origin + '/visitor/';
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting to the main application...</p>
+</body>
+</html> 

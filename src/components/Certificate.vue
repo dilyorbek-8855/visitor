@@ -89,7 +89,7 @@ export default {
       // Include visitor data in the URL
       const visitorName = encodeURIComponent(visitorStore.fullName)
       const certificateId = visitorStore.certificateNumber || 'CERT' + Date.now()
-      const path = `/certificate?name=${visitorName}&id=${certificateId}`
+      const path = `#/certificate?name=${visitorName}&id=${certificateId}`
       
       // Create the full URL with visitor data
       const certificateUrl = `${baseUrl}${path}`
@@ -245,9 +245,20 @@ export default {
       // Check if visitor data exists and quiz is completed
       if (!visitorStore.visitorData.lastName || !visitorStore.isQuizCompleted) {
         // Check if we have data in URL parameters (from QR code scan)
-        const urlParams = new URLSearchParams(window.location.search)
-        const nameFromUrl = urlParams.get('name')
-        const idFromUrl = urlParams.get('id')
+        // Handle both regular search params and hash-based params
+        let urlParams = new URLSearchParams(window.location.search)
+        let nameFromUrl = urlParams.get('name')
+        let idFromUrl = urlParams.get('id')
+        
+        // If not found in search params, check hash params
+        if (!nameFromUrl || !idFromUrl) {
+          const hash = window.location.hash
+          if (hash && hash.includes('?')) {
+            const hashParams = new URLSearchParams(hash.split('?')[1])
+            nameFromUrl = hashParams.get('name')
+            idFromUrl = hashParams.get('id')
+          }
+        }
         
         if (nameFromUrl && idFromUrl) {
           // This is a QR code scan - create temporary visitor data
