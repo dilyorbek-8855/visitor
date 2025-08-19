@@ -150,31 +150,31 @@ export default {
         },
         {
           question: 'R&D centerda faoliyat olib bormaydigan yo\'nalishni belgilang',
-          options: ['Cost engineering', 'Texnologik qo\'llab-quvvatlash muhandisligi', 'Reverse engieering', 'Taqqoslov va Tahlil']
+          options: ['Cost engineering', 'Xalqaro hamkorlik va Dizayn', 'Reverse engieering', 'Taqqoslov va Tahlil']
         },
         {
-          question: 'Markazda necha nafar muhandis va rahbarlar faoliyat olib boradi?',
+          question: 'Markazda necha nafar muhandis faoliyat olib boradi?',
           options: ['100 nafardan kam', '100 nafardan ko\'p', '80 nafardan ko\'p', '80 nafardan kam']
         },
         {
-          question: 'Markazning O\'zbek modelini ishlab chiqarish rejasi nechanchi yilgacha maqsad qilib olingan?',
+          question: 'Markazning O\'zbek modelini ishlab chiqarish rejasi nechanchi yilgacha maqsad qlib olingan?',
           options: ['2026-yil', '2027-yil', '2029-yil', '2030-yil']
         },
         {
           question: 'R&D markazida qanday hamkorliklar amalga oshiriladi?',
-          options: ['Mahalliy hamkorliklar', 'Ichki hamkorliklar', 'Xorijiy hamkorliklar', 'Barcha javoblar to\'g\'ri']
+          options: ['Mahalliy hamkorliklar', 'OTM lar bilan hamkorlik', 'Xorijiy hamkorliklar', 'Barcha javoblar to\'g\'ri']
         },
         {
           question: 'Markaz labarotoriyasida foydalaniluvchi Fanuc va Yaskawa robotlari qaysi davlatga tegishli?',
           options: ['Koreya va Yaponiya', 'Ikkisi ham Koreya', 'Ikkisi ham Yaponiya', 'Braziliya va Yaponiya']
         },
         {
-          question: 'R&D markazida qanday malakali kadrlar ishlaydi?',
-          options: ['Yuqori malakali', 'O\'rta malakali', 'Boshlang\'ich malakali', 'Barcha turdagi']
+          question: 'R&D markazida tomonidan amalga oshirilgan face lift loyihasi qaysi modellar ustida qilingan?',
+          options: ['Cobalt', 'Onix', 'Tracker', 'Cobalt va Onix']
         },
         {
-          question: 'Intellektual boshqaruv texnologiyalari bo\'linmasi qaysi boshqarma tarkibiga kiradi?',
-          options: ['Tizimlarni rivojlantirish', 'Benchmarking', 'Ilmiy-texnik tadqiqotlar', 'Sanoat tizimlari muhandisligi']
+          question: 'Markaz tomonidan tuning loyixalari qaysi model ustida amalga oshirilmagan?',
+          options: ['Gentra', 'Onix', 'Tracker', 'Cobalt']
         }
       ],
       ru: [
@@ -192,10 +192,10 @@ export default {
         },
         {
           question: 'Укажите направление, по которому не ведется деятельность в R&D центре',
-          options: ['Cost engineering', 'Инженерия технологической поддержки', 'Reverse engineering', 'Стандартизация и анализ']
+          options: ['Cost engineering', 'Международное сотрудничество и Дизайн', 'Reverse engineering', 'Стандартизация и анализ']
         },
         {
-          question: 'Сколько инженеров и руководителей работает в центре?',
+          question: 'Сколько инженеров работает в центре?',
           options: ['Менее 100 человек', 'Более 100 человек', 'Более 80 человек', 'Менее 80 человек']
         },
         {
@@ -204,19 +204,19 @@ export default {
         },
         {
           question: 'Какие виды сотрудничества осуществляются в R&D центре?',
-          options: ['Местное сотрудничество', 'Внутреннее сотрудничество', 'Иностранное сотрудничество', 'Все ответы правильные']
+          options: ['Местное сотрудничество', 'Сотрудничество с ВУЗами', 'Иностранное сотрудничество', 'Все ответы правильные']
         },
         {
           question: 'Роботы Fanuc и Yaskawa, используемые в лаборатории центра, принадлежат какой стране?',
           options: ['Корея и Япония', 'Оба из Кореи', 'Оба из Японии', 'Бразилия и Япония']
         },
         {
-          question: 'Какие квалифицированные кадры работают в R&D центре?',
-          options: ['Высокой квалификации', 'Средней квалификации', 'Начальной квалификации', 'Всех видов']
+          question: 'На каких моделях был выполнен проект face lift, реализованный R&D центром?',
+          options: ['Cobalt', 'Onix', 'Tracker', 'Cobalt и Onix']
         },
         {
-          question: 'В состав какого управления входит отдел интеллектуальных технологий управления?',
-          options: ['Развитие систем', 'Benchmarking', 'Научно-технические исследования', 'Инженерия промышленных систем']
+          question: 'На какой модели не были реализованы проекты тюнинга центром?',
+          options: ['Gentra', 'Onix', 'Tracker', 'Cobalt']
         }
       ],
       en: [
@@ -234,10 +234,10 @@ export default {
         },
         {
           question: 'Identify the area where no activity is carried out at the R&D center',
-          options: ['Cost engineering', 'Technological support engineering', 'Reverse engineering', 'Standardization and Analysis']
+          options: ['Cost engineering', 'International cooperation and Design', 'Reverse engineering', 'Standardization and Analysis']
         },
         {
-          question: 'How many engineers and managers work at the center?',
+          question: 'How many engineers work at the center?',
           options: ['Less than 100 people', 'More than 100 people', 'More than 80 people', 'Less than 80 people']
         },
         {
@@ -246,19 +246,19 @@ export default {
         },
         {
           question: 'What types of cooperation are carried out at the R&D center?',
-          options: ['Local cooperation', 'Internal cooperation', 'Foreign cooperation', 'All answers are correct']
+          options: ['Local cooperation', 'Cooperation with universities', 'Foreign cooperation', 'All answers are correct']
         },
         {
           question: 'Fanuc and Yaskawa robots used in the center\'s laboratory belong to which country?',
           options: ['Korea and Japan', 'Both from Korea', 'Both from Japan', 'Brazil and Japan']
         },
         {
-          question: 'What qualified personnel work at the R&D center?',
-          options: ['High qualification', 'Medium qualification', 'Entry level qualification', 'All types']
+          question: 'On which models was the face lift project implemented by the R&D center?',
+          options: ['Cobalt', 'Onix', 'Tracker', 'Cobalt and Onix']
         },
         {
-          question: 'Which management department includes the intelligent control technologies division?',
-          options: ['Systems development', 'Benchmarking', 'Scientific and technical research', 'Industrial systems engineering']
+          question: 'On which model were tuning projects not implemented by the center?',
+          options: ['Gentra', 'Onix', 'Tracker', 'Cobalt']
         }
       ]
     }
@@ -295,7 +295,7 @@ export default {
     
     const finishQuiz = () => {
       // Calculate score
-      const correctAnswers = [2, 3, 3, 1, 1, 3, 3, 2, 0, 3] // Correct answers for new questions
+      const correctAnswers = [2, 3, 3, 1, 1, 3, 3, 2, 3, 0] // Correct answers for new questions
       let calculatedScore = 0
       
       for (let i = 0; i < totalQuestions; i++) {
