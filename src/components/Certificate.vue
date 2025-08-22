@@ -52,6 +52,9 @@
         <button @click="startOver" class="action-btn start-btn">
           {{ translations[currentLanguage].startOver }}
         </button>
+        <button @click="handleLogout" class="action-btn logout-btn">
+          Logout
+        </button>
       </div>
     </div>
   </div>
@@ -232,11 +235,16 @@ export default {
       router.push('/quiz')
     }
 
-    const startOver = () => {
+        const startOver = () => {
       visitorStore.resetAll()
       router.push('/')
     }
-
+    
+    const handleLogout = () => {
+      localStorage.removeItem('isLoggedIn')
+      router.push('/login')
+    }
+    
     onMounted(() => {
       // Set language from store
       currentLanguage.value = visitorStore.currentLanguage
@@ -289,6 +297,7 @@ export default {
       printCertificate,
       backToQuiz,
       startOver,
+      handleLogout,
       certificateImage
     }
   }
@@ -451,6 +460,15 @@ export default {
 
 .start-btn:hover {
   background: #c82333;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
 }
 
 

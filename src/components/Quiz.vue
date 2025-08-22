@@ -458,6 +458,10 @@ export default {
   text-align: right;
   margin-bottom: 2rem;
   flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .lang-select {
@@ -466,6 +470,21 @@ export default {
   border-radius: 5px;
   background: white;
   font-size: 0.9rem;
+}
+
+.logout-btn {
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
 }
 
 .question-container {

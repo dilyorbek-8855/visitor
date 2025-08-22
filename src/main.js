@@ -4,18 +4,51 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 
 // Import components
+import Login from './components/Login.vue'
 import Welcome from './components/Welcome.vue'
 import Quiz from './components/Quiz.vue'
 import Certificate from './components/Certificate.vue'
 
 // Create router
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', component: Welcome },
-    { path: '/quiz', component: Quiz },
-    { path: '/certificate', component: Certificate }
+    { 
+      path: '/login', 
+      component: Login,
+      meta: { requiresAuth: false }
+    },
+    { 
+      path: '/', 
+      component: Welcome,
+      meta: { requiresAuth: true }
+    },
+    { 
+      path: '/quiz', 
+      component: Quiz,
+      meta: { requiresAuth: true }
+    },
+    { 
+      path: '/certificate', 
+      component: Certificate,
+      meta: { requiresAuth: true }
+    }
   ]
+})
+
+// Navigation guard for authentication
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+  
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    // Redirect to login if trying to access protected route
+    next('/login')
+  } else if (to.path === '/login' && isLoggedIn) {
+    // Redirect to welcome if already logged in
+    next('/')
+  } else {
+    next()
+  }
 })
 
 // Create Pinia store

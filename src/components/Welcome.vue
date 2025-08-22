@@ -247,6 +247,8 @@ export default {
   cursor: pointer;
 }
 
+
+
 .center-content {
   flex: 1;
   display: flex;
