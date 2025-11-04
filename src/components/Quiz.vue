@@ -137,8 +137,13 @@ export default {
     const questions = {
       uz: [
         {
-          question: 'R&D markazining amaldagi rahbari kim?',
-          options: ['Bahtiyor Uraymov', 'Timur Hamrayev', 'Saidbek Mamadaliyev', 'Fahriddin Otaxonov']
+          question: 'R&D markazining asosiy maqsadi nima?',
+          options: [
+            'Korxonaning innovatsion salohiyatini oshirish',
+            'Korxonaning moliyaviy hisobotlarini tayorlash', 
+            'Ishchilar soni va xarajatlarni qisqartirish', 
+            'Marketing kompaniyalari bilan ishlash'
+          ]
         },
         {
           question: 'R&D center nechanchi yilda tashkil etilgan?',
@@ -179,16 +184,26 @@ export default {
       ],
       ru: [
         {
-          question: 'Кто является действующим руководителем R&D центра?',
-          options: ['Бахтиёр Ураймов', 'Тимур Хамраев', 'Саидбек Мамадалиев', 'Фахриддин Отахонов']
-        },
+  question: 'R&D markazining asosiy maqsadi nima?',
+  options: [
+    "To increase the company's innovative potential",
+    "To prepare the company's financial reports",
+    "To reduce the number of employees and expenses",
+    "To work with marketing companies"
+  ]
+},
         {
-          question: 'В каком году был основан R&D центр?',
+          question: 'Какова основная цель R&D центра?',
           options: ['2024 год', '2022 год', '2023 год', '2025 год']
         },
         {
           question: 'По каким направлениям ведутся работы в R&D центре?',
-          options: ['Инженерия пресс-форм', 'Инженерия упаковки', 'Инженерия промышленных систем', 'Все ответы правильные']
+          options: [
+            'Повышение инновационного потенциала компании', 
+            'Подготовка финансовой отчётности компании', 
+            'Сокращение числа сотрудников и расходов', 
+            'Работа с маркетинговыми компаниями'
+          ]
         },
         {
           question: 'Укажите направление, по которому не ведется деятельность в R&D центре',
@@ -221,8 +236,13 @@ export default {
       ],
       en: [
         {
-          question: 'Who is the current head of the R&D center?',
-          options: ['Bahtiyor Uraymov', 'Timur Hamrayev', 'Saidbek Mamadaliyev', 'Fahriddin Otaxonov']
+          question: 'What is the main goal of the R&D center?',
+          options: [
+            'To increase the company\'s innovative potential', 
+            'To prepare the company\'s financial reports', 
+            'To reduce the number of employees and expenses', 
+            'To work with marketing companies'
+          ]
         },
         {
           question: 'In which year was the R&D center established?',
@@ -295,7 +315,7 @@ export default {
     
     const finishQuiz = () => {
       // Calculate score
-      const correctAnswers = [2, 3, 3, 1, 1, 3, 3, 2, 3, 0] // Correct answers for new questions
+      const correctAnswers = [0, 3, 3, 1, 2, 3, 3, 2, 3, 0] // Correct answers for new questions
       let calculatedScore = 0
       
       for (let i = 0; i < totalQuestions; i++) {
